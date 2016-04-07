@@ -3,11 +3,25 @@ Convenient extensions to the [Mockito] (http://mockito.org/) unit-testing mock o
 
 Requires Java 8 (or higher)
 
-Adds a mixin interface and extra matchers, including lambda-capable matchers.
+Adds a mixin interface (built by [interface-it] (https://github.com/aro-tech/interface-it)) and extra matchers, including lambda-capable matchers.
 
 ##Latest release
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|2.0.44-beta.1|jar)
 
-Coming soon
+[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v2.0.44-beta.1) 
+
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/2.0.44-beta.1)
+
+In Maven:
+
+```html
+<dependency>
+  <groupId>com.github.aro-tech</groupId>
+  <artifactId>extended-mockito</artifactId>
+  <version>2.0.44-beta.1</version>
+</dependency>
+```
+
 
 ##Example usage 
 ```
