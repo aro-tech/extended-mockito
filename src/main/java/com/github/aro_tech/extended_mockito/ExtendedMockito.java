@@ -68,10 +68,7 @@ public interface ExtendedMockito extends MockitoMixin {
 
 			private boolean containsOneOf(String toCheck, String... args) {
 				for (CharSequence arg : args) {
-					if (null == arg) {
-						return false;
-					}
-					if (toCheck.contains(arg)) {
+					if (null != arg && toCheck.contains(arg)) {
 						return true;
 					}
 				}

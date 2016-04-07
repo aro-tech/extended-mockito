@@ -105,6 +105,13 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	}
 
 	@Test
+	public void containsOneOrMoreOf_can_fail_to_match() {
+		when(mock.doAThingWithAString(containsOneOrMoreOf("something", "anything"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAString("nothing")).isFalse();
+	}
+
+	
+	@Test
 	public void containsOneOrMoreOf_can_fail_to_match_string_with_null() {
 		when(mock.doAThingWithAString(containsOneOrMoreOf((String) null))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAString("Able was I ere I saw Elba")).isFalse();
@@ -175,7 +182,7 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	}
 
 	@Test
-	public void allMoreItemsMatch_can_handle_null() {
+	public void allItemsMatch_can_handle_null() {
 		when(mock.doAThingWithAList(allItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(null)).isFalse();
 	}
