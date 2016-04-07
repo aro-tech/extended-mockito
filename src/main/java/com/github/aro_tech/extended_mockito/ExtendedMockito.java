@@ -84,7 +84,7 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * A predicate-based matcher for list arguments - all items must match
 	 * 
 	 * @param predicate
-	 * @return result of argThat() call
+	 * @return null
 	 */
 	default <T extends Object> List<T> allItemsMatch(Predicate<T> predicate) {
 		return argThat(new ListMatcher<T>() {
@@ -100,7 +100,8 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * match
 	 * 
 	 * @param predicate
-	 * @return result of argThat() call
+	 *            A lambda to evaluate a method argument
+	 * @return null
 	 */
 	default <T extends Object> List<T> oneOrMoreItemsMatch(Predicate<T> predicate) {
 		return argThat(new ListMatcher<T>() {
@@ -111,4 +112,136 @@ public interface ExtendedMockito extends MockitoMixin {
 		});
 	}
 
+	/**
+	 * A predicate-based matcher for object arguments
+	 * 
+	 * DO NOT USE THIS FOR PRIMITIVE ARGUMENTS such as int, double, etc.
+	 * 
+	 * Use intMatches, doubleMatches, etc. instead, because Mockito doesn't
+	 * always handle autoboxing well
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @return null
+	 */
+	default <T> T objectMatches(Predicate<T> predicate) {
+		return argThat(new ArgumentMatcher<T>() {
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((T) argument);
+			}
+		});
+	}
+
+	/**
+	 * A predicate-based matcher for primitive int arguments
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @return 0
+	 */
+	default int intMatches(Predicate<Integer> predicate) {
+		return intThat(new ArgumentMatcher<Integer>() {
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((Integer) argument);
+			}
+		});
+	}
+
+	/**
+	 * A predicate-based matcher for primitive double arguments
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @return 0
+	 */
+	default double doubleMatches(Predicate<Double> predicate) {
+		return doubleThat(new ArgumentMatcher<Double>() {
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((Double) argument);
+			}
+		});
+	}
+
+	/**
+	 * A predicate-based matcher for primitive float arguments
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @return 0
+	 */
+	default float floatMatches(Predicate<Float> predicate) {
+		return floatThat(new ArgumentMatcher<Float>() {
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((Float) argument);
+			}
+		});
+	}
+
+	/**
+	 * A predicate-based matcher for primitive short arguments
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @return 0
+	 */
+	default short shortMatches(Predicate<Short> predicate) {
+		return shortThat(new ArgumentMatcher<Short>() {
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((short) argument);
+			}
+		});
+	}
+
+	/**
+	 * A predicate-based matcher for primitive long arguments
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @return 0
+	 */
+	default long longMatches(Predicate<Long> predicate) {
+		return longThat(new ArgumentMatcher<Long>() {
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((long) argument);
+			}
+		});
+	}
+
+	/**
+	 * A predicate-based matcher for primitive byte arguments
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @return 0
+	 */
+	default byte byteMatches(Predicate<Byte> predicate) {
+		return byteThat(new ArgumentMatcher<Byte>() {
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((byte) argument);
+			}
+		});
+	}
+
+	/**
+	 * A predicate-based matcher for primitive char arguments
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @return 0
+	 */
+	default char charMatches(Predicate<Character> predicate) {
+		return charThat(new ArgumentMatcher<Character>() {
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((char) argument);
+			}
+		});
+	}
 }

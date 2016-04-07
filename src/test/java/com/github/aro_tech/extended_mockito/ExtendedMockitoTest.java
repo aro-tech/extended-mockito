@@ -23,6 +23,21 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 		public boolean doAThingWithAString(String arg);
 
 		public boolean doAThingWithAList(List<String> arg);
+
+		public boolean doAThingWithAnInt(int arg);
+
+		public boolean doAThingWithALong(long arg);
+
+		public boolean doAThingWithADouble(double arg);
+
+		public boolean doAThingWithAFloat(float arg);
+
+		public boolean doAThingWithAByte(byte arg);
+
+		public boolean doAThingWithAChar(char arg);
+
+		public boolean doAThingWithAShort(short arg);
+
 	}
 
 	private TestInterface mock = mock(TestInterface.class);
@@ -152,16 +167,120 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 			}
 		})).isFalse();
 	}
-	
+
 	@Test
 	public void oneOrMoreItemsMatch_can_handle_null() {
 		when(mock.doAThingWithAList(oneOrMoreItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(null)).isFalse();
 	}
-	
+
 	@Test
 	public void allMoreItemsMatch_can_handle_null() {
 		when(mock.doAThingWithAList(allItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(null)).isFalse();
+	}
+
+	@Test
+	public void objectMatches_can_match() {
+		when(mock.doAThingWithAString(objectMatches((str) -> true))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAString("Hi")).isTrue();
+	}
+
+	@Test
+	public void objectMatches_can_fail_to_match() {
+		when(mock.doAThingWithAString(objectMatches((str) -> str.equals("Bye")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAString("Hi")).isFalse();
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void objectMatches_throws_NPE_on_null_predicate() {
+		when(mock.doAThingWithAString(objectMatches(null))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAString("Hi")).isFalse();
+	}
+
+	@Test
+	public void can_match_int() {
+		when(mock.doAThingWithAnInt(intMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAnInt(111)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_int() {
+		when(mock.doAThingWithAnInt(intMatches((val) -> val < 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAnInt(111)).isFalse();
+	}
+
+	@Test
+	public void can_match_double() {
+		when(mock.doAThingWithADouble(doubleMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithADouble(111.1)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_double() {
+		when(mock.doAThingWithADouble(doubleMatches((val) -> val < Math.PI))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithADouble(111.1)).isFalse();
+	}
+
+	@Test
+	public void can_match_float() {
+		when(mock.doAThingWithAFloat(floatMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAFloat(111.1F)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_float() {
+		when(mock.doAThingWithAFloat(floatMatches((val) -> val < Math.PI))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAFloat(111.1F)).isFalse();
+	}
+
+	@Test
+	public void can_match_short() {
+		when(mock.doAThingWithAShort(shortMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAShort((short) 111)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_short() {
+		when(mock.doAThingWithAShort(shortMatches((val) -> val < 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAShort((short) 111)).isFalse();
+	}
+
+	@Test
+	public void can_match_long() {
+		when(mock.doAThingWithALong(longMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithALong(111L)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_long() {
+		when(mock.doAThingWithALong(longMatches((val) -> val < 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithALong(111L)).isFalse();
+	}
+
+	@Test
+	public void can_match_byte() {
+		when(mock.doAThingWithAByte(byteMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAByte((byte) 111)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_byte() {
+		when(mock.doAThingWithAByte(byteMatches((val) -> val < 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAByte((byte) 111)).isFalse();
+	}
+
+	@Test
+	public void can_match_char() {
+		when(mock.doAThingWithAChar(charMatches((val) -> Character.isAlphabetic(val.charValue()))))
+				.thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAChar('c')).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_char() {
+		when(mock.doAThingWithAChar(charMatches((val) -> Character.isAlphabetic(val.charValue()))))
+				.thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAChar('#')).isFalse();
 	}
 }
