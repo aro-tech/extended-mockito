@@ -28,7 +28,7 @@ In Maven:
 
 ##Example usage 
 ```
-	public class EmployeeTest implements extended-mockito { 
+	public class EmployeeTest implements ExtendedMockito { 
 		
 		@Test
 		public void can_update_vacation_days() {
@@ -45,7 +45,7 @@ In Maven:
 
 ```
 
-See [the unit tests] for more examples. (https://github.com/aro-tech/extended-mockito/blob/master/src/test/java/com/github/aro_tech/extended_mockito/ExtendedMockitoTest.java) 
+See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/src/test/java/com/github/aro_tech/extended_mockito/ExtendedMockitoTest.java) for more examples.  
 
 ##List of added matchers:
 
