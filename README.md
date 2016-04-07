@@ -12,6 +12,9 @@ Adds a mixin interface (built by [interface-it] (https://github.com/aro-tech/int
 
 [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/2.0.44-beta.1)
 
+[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/2.0.44-beta.1/ "binaries")
+
+
 In Maven:
 
 ```html
