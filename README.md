@@ -49,15 +49,17 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
 
 ##List of added matchers:
 
-String matchers 
+**String matchers** 
  * containsAllOf
  * containsOneOrMoreOf
 
-Lambda Predicate matchers for lists
+**Lambda Predicate matchers for lists**
  * allItemsMatch
  * oneOrMoreItemsMatch
 
-Lambda Predicate matchers for objects and primitives
+**Lambda Predicate matchers for objects and primitives**
+
+*Mockito already accepts lambdas for argThat(), intThat(), etc. but does not accept Predicate instances, and the lambdas accepted by argThat(), intThat() etc. require type casts. The following methods accept a Predicate instance or a lambda without the need for a type cast.*
  * objectMatches (use only for objects, not for auto-boxed primitive types)
  * intMatches
  * longMatches

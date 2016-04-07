@@ -189,7 +189,7 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 
 	@Test
 	public void objectMatches_can_match() {
-		when(mock.doAThingWithAString(objectMatches((str) -> true))).thenReturn(Boolean.TRUE);
+		when(mock.doAThingWithAString(objectMatches((str) -> str.length() < 3))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAString("Hi")).isTrue();
 	}
 

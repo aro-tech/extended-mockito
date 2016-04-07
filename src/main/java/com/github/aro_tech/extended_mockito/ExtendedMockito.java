@@ -112,6 +112,10 @@ public interface ExtendedMockito extends MockitoMixin {
 	/**
 	 * A predicate-based matcher for object arguments
 	 * 
+	 * Effectively, it's equivalent to argThat(), but objectMatches can accept a
+	 * Predicate instance which can be reused in a variable outside of Mockito,
+	 * whereas argThat can accept as its argument a lambda, but not a Predicate.
+	 * 
 	 * DO NOT USE THIS FOR PRIMITIVE ARGUMENTS such as int, double, etc.
 	 * 
 	 * Use intMatches, doubleMatches, etc. instead, because Mockito doesn't
