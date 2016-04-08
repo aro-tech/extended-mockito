@@ -32,8 +32,12 @@ In Maven:
 ```	
 
 ```
-	when(mock.doAThingWithATestBean(
-		toStringContainsAllOf(bean.getClass(), "I ere I", 			"Elba", "was I"))).thenReturn(Boolean.TRUE);
+	when(mock.acceptExtractedInformation(toStringContainsAllOf("Shire", "Baggins", "Precious"))).thenReturn(Boolean.TRUE);
+```
+
+```
+when(mock.checkCVBuzzwords(toStringContainsOneOrMoreOf("SCRUM", "Kanban", "TDD", "DDD", "ROTFL")))
+				.thenReturn(Boolean.TRUE);
 ```
 
 ```		
@@ -45,7 +49,7 @@ In Maven:
 ```		
 
 ```
-		verify(mock).doAThingWithATestBean(hasToString(bean.toString()));	
+		verify(mock).doAThingWithABean(hasToString("[Employee] name=John Smith, group=R&D"));	
 ```
 
 See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/src/test/java/com/github/aro_tech/extended_mockito/ExtendedMockitoTest.java) for more examples.  
