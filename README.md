@@ -29,20 +29,23 @@ In Maven:
 ##Example usage 
 ```
 	public class EmployeeTest implements ExtendedMockito { 
-		
-		@Test
-		public void can_update_vacation_days() {
-			Assert.assertEquals(0, underTest.getCurrentVacationDaysForEmployee(testEmployee));
-		
-			when(admin.getAnnualVacationDays(objectMatches(
-				(emp) -> emp.getStartDate().isBefore(LocalDate.now().minus(3, ChronoUnit.YEARS)))))
-						.thenReturn(SENIOR_EMPLOYEE_VACATION_DAYS);
-			
-			underTest.updateVacationDaysForNewPeriod();
-			Assert.assertEquals(SENIOR_EMPLOYEE_VACATION_DAYS, underTest.getCurrentVacationDaysForEmployee(testEmployee));
-		}
-	}
+```	
 
+```
+	when(mock.doAThingWithATestBean(
+		toStringContainsAllOf(bean.getClass(), "I ere I", 			"Elba", "was I"))).thenReturn(Boolean.TRUE);
+```
+
+```		
+		when(mock.doAThingWithAList(oneOrMoreItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+```
+
+```		
+		when(mock.doAThingWithADouble(doubleMatches((val) -> val < Math.PI))).thenReturn(Boolean.TRUE);
+```		
+
+```
+		verify(mock).doAThingWithATestBean(hasToString(bean.toString()));	
 ```
 
 See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/src/test/java/com/github/aro_tech/extended_mockito/ExtendedMockitoTest.java) for more examples.  
