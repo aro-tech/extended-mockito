@@ -339,7 +339,7 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	@Test
 	public void can_match_non_string_bean_containing_several_things() {
 		TestBean bean = new TestBean("Able was I ere I saw Elba");
-		when(mock.doAThingWithATestBean(toStringContainsAllOf(bean.getClass(), "I ere I", " Elba", "was I")))
+		when(mock.doAThingWithATestBean(toStringContainsAllOf("I ere I", " Elba", "was I")))
 				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
 	}
@@ -347,7 +347,7 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	@Test
 	public void can_match_non_string_bean_containing_one_of_several_things() {
 		TestBean bean = new TestBean("Able was I ere I saw Elba");
-		when(mock.doAThingWithATestBean(toStringContainsOneOrMoreOf(bean.getClass(), "I ere I", " Elbow", "Fuzzy Wuzzy was a bear")))
+		when(mock.doAThingWithATestBean(toStringContainsOneOrMoreOf("I ere I", " Elbow", "Fuzzy Wuzzy was a bear")))
 				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
 	}

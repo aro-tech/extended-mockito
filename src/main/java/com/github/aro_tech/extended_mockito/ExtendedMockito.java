@@ -31,13 +31,11 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * A matcher call which matches if an argument's toString() result contains
 	 * all of the given text
 	 * 
-	 * @param clazz
-	 *            The type of the argument expected
 	 * @param expectedParts
 	 * @return true if all of the expected parts match, false if one does not
 	 *         match
 	 */
-	default <T> T toStringContainsAllOf(Class<T> clazz, final CharSequence... expectedParts) {
+	default <T> T toStringContainsAllOf(final CharSequence... expectedParts) {
 		return argThat((argument) -> StringUtil.containsAll(argument, expectedParts));
 	}
 
@@ -56,12 +54,10 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * A matcher call which matches if an argument's toString() result contains
 	 * at least one of the given text
 	 * 
-	 * @param clazz
-	 *            The type of the argument expected
 	 * @param expectedParts
 	 * @return true if any of the expected parts match, false if none match
 	 */
-	default <T> T toStringContainsOneOrMoreOf(Class<T> clazz, final CharSequence... expectedParts) {
+	default <T> T toStringContainsOneOrMoreOf(final CharSequence... expectedParts) {
 		return argThat((argument) -> StringUtil.containsOneOrMoreOf(argument, expectedParts));
 	}
 
