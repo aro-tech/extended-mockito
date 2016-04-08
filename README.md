@@ -52,7 +52,10 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
 **String matchers** 
  * containsAllOf
  * containsOneOrMoreOf
-
+ * hasToString
+ * toStringContainsAllOf
+ * toStringContainsOneOrMoreOf
+ 
 **Lambda Predicate matchers for lists**
  * allItemsMatch
  * oneOrMoreItemsMatch

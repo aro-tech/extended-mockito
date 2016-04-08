@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import org.mockito.ArgumentMatcher;
+import com.github.aro_tech.extended_mockito.util.StringUtil;
 
 /**
  * Mixin interface which includes all of Mockito plus added functionalities
@@ -23,58 +23,46 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @param expectedParts
 	 * @return true if all the expected parts match
 	 */
-	default String containsAllOf(final String... expectedParts) {
-		return argThat(new ArgumentMatcher<String>() {
+	default String containsAllOf(final CharSequence... expectedParts) {
+		return argThat((argument) -> StringUtil.containsAll(argument, expectedParts));
+	}
 
-			@Override
-			public boolean matches(Object argument) {
-				if (null == expectedParts || null == argument) {
-					return false;
-				}
-				return contains(argument.toString(), expectedParts);
-			}
-
-			private boolean contains(String toCheck, String... args) {
-				for (CharSequence arg : args) {
-					if (null == arg) {
-						return false;
-					}
-					if (!toCheck.contains(arg)) {
-						return false;
-					}
-				}
-				return true;
-			}
-		});
+	/**
+	 * A matcher call which matches if an argument's toString() result contains
+	 * all of the given text
+	 * 
+	 * @param clazz
+	 *            The type of the argument expected
+	 * @param expectedParts
+	 * @return true if all of the expected parts match, false if one does not
+	 *         match
+	 */
+	default <T> T toStringContainsAllOf(Class<T> clazz, final CharSequence... expectedParts) {
+		return argThat((argument) -> StringUtil.containsAll(argument, expectedParts));
 	}
 
 	/**
 	 * A matcher call which matches if an argument contains at least one of the
-	 * given text
+	 * given text parts
 	 * 
 	 * @param expectedParts
 	 * @return true if any of the expected parts match, false if none match
 	 */
-	default String containsOneOrMoreOf(final String... expectedParts) {
-		return argThat(new ArgumentMatcher<String>() {
+	default String containsOneOrMoreOf(final CharSequence... expectedParts) {
+		return argThat((argument) -> StringUtil.containsOneOrMoreOf(argument, expectedParts));
+	}
 
-			@Override
-			public boolean matches(Object argument) {
-				if (null == expectedParts || null == argument) {
-					return false;
-				}
-				return containsOneOf(argument.toString(), expectedParts);
-			}
-
-			private boolean containsOneOf(String toCheck, String... args) {
-				for (CharSequence arg : args) {
-					if (null != arg && toCheck.contains(arg)) {
-						return true;
-					}
-				}
-				return false;
-			}
-		});
+	/**
+	 * A matcher call which matches if an argument's toString() result contains
+	 * at least one of the given text
+	 * 
+	 * @param clazz
+	 *            The type of the argument expected
+	 * @param expectedParts
+	 * @return true if any of the expected parts match, false if none match
+	 */
+	default <T> T toStringContainsOneOrMoreOf(Class<T> clazz, final CharSequence... expectedParts) {
+		return argThat((argument) -> StringUtil.containsOneOrMoreOf(argument, expectedParts));
 	}
 
 	/**
@@ -126,12 +114,7 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @return null
 	 */
 	default <T> T objectMatches(Predicate<T> predicate) {
-		return argThat(new ArgumentMatcher<T>() {
-			@Override
-			public boolean matches(Object argument) {
-				return predicate.test((T) argument);
-			}
-		});
+		return argThat((argument) -> predicate.test((T) argument));
 	}
 
 	/**
@@ -142,12 +125,7 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @return 0
 	 */
 	default int intMatches(Predicate<Integer> predicate) {
-		return intThat(new ArgumentMatcher<Integer>() {
-			@Override
-			public boolean matches(Object argument) {
-				return predicate.test((Integer) argument);
-			}
-		});
+		return intThat((argument) -> predicate.test((int) argument));
 	}
 
 	/**
@@ -158,12 +136,7 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @return 0
 	 */
 	default double doubleMatches(Predicate<Double> predicate) {
-		return doubleThat(new ArgumentMatcher<Double>() {
-			@Override
-			public boolean matches(Object argument) {
-				return predicate.test((Double) argument);
-			}
-		});
+		return doubleThat((argument) -> predicate.test((double) argument));
 	}
 
 	/**
@@ -174,12 +147,7 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @return 0
 	 */
 	default float floatMatches(Predicate<Float> predicate) {
-		return floatThat(new ArgumentMatcher<Float>() {
-			@Override
-			public boolean matches(Object argument) {
-				return predicate.test((Float) argument);
-			}
-		});
+		return floatThat((argument) -> predicate.test((float) argument));
 	}
 
 	/**
@@ -190,12 +158,7 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @return 0
 	 */
 	default short shortMatches(Predicate<Short> predicate) {
-		return shortThat(new ArgumentMatcher<Short>() {
-			@Override
-			public boolean matches(Object argument) {
-				return predicate.test((short) argument);
-			}
-		});
+		return shortThat((argument) -> predicate.test((short) argument));
 	}
 
 	/**
@@ -206,12 +169,7 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @return 0
 	 */
 	default long longMatches(Predicate<Long> predicate) {
-		return longThat(new ArgumentMatcher<Long>() {
-			@Override
-			public boolean matches(Object argument) {
-				return predicate.test((long) argument);
-			}
-		});
+		return longThat((argument) -> predicate.test((long) argument));
 	}
 
 	/**
@@ -222,12 +180,7 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @return 0
 	 */
 	default byte byteMatches(Predicate<Byte> predicate) {
-		return byteThat(new ArgumentMatcher<Byte>() {
-			@Override
-			public boolean matches(Object argument) {
-				return predicate.test((byte) argument);
-			}
-		});
+		return byteThat((argument) -> predicate.test((byte) argument));
 	}
 
 	/**
@@ -238,11 +191,17 @@ public interface ExtendedMockito extends MockitoMixin {
 	 * @return 0
 	 */
 	default char charMatches(Predicate<Character> predicate) {
-		return charThat(new ArgumentMatcher<Character>() {
-			@Override
-			public boolean matches(Object argument) {
-				return predicate.test((char) argument);
-			}
-		});
+		return charThat((argument) -> predicate.test((char) argument));
 	}
+
+	/**
+	 * Match based on exact toString() of the argument
+	 * 
+	 * @param expectedToString
+	 * @return null
+	 */
+	default <T> T hasToString(String expectedToString) {
+		return argThat((argument) -> null != argument && argument.toString().equals(expectedToString));
+	}
+
 }

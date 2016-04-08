@@ -38,6 +38,28 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 
 		public boolean doAThingWithAShort(short arg);
 
+		public boolean doAThingWithATestBean(TestBean arg);
+
+	}
+
+	private static class TestBean {
+		String toStr;
+
+		/**
+		 * 
+		 * Constructor
+		 * 
+		 * @param toStr
+		 *            The value which will appear in toString()
+		 */
+		public TestBean(String toStr) {
+			this.toStr = toStr;
+		}
+
+		@Override
+		public String toString() {
+			return toStr;
+		}
 	}
 
 	private TestInterface mock = mock(TestInterface.class);
@@ -110,7 +132,6 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 		assertThat(mock.doAThingWithAString("nothing")).isFalse();
 	}
 
-	
 	@Test
 	public void containsOneOrMoreOf_can_fail_to_match_string_with_null() {
 		when(mock.doAThingWithAString(containsOneOrMoreOf((String) null))).thenReturn(Boolean.TRUE);
@@ -290,4 +311,45 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAChar('#')).isFalse();
 	}
+
+	@Test
+	public void can_match_based_on_exact_tostring() {
+		TestBean bean = new TestBean("able was i ere i saw elba");
+		when(mock.doAThingWithATestBean(hasToString(bean.toString()))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
+		verify(mock).doAThingWithATestBean(hasToString(bean.toString()));
+	}
+
+	@Test
+	public void can_fail_to_match_based_on_exact_tostring() {
+		TestBean bean = new TestBean("able was i ere i saw elba");
+		when(mock.doAThingWithATestBean(hasToString("i ere i"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithATestBean(bean)).isFalse();
+		verify(mock, never()).doAThingWithATestBean(hasToString("i ere i"));
+		verify(mock).doAThingWithATestBean(hasToString(bean.toString()));
+	}
+
+	@Test
+	public void can_fail_to_match_based_on_exact_tostring_with_null() {
+		when(mock.doAThingWithATestBean(hasToString("i ere i"))).thenReturn(Boolean.FALSE);
+		assertThat(mock.doAThingWithATestBean(null)).isFalse();
+		verify(mock, never()).doAThingWithATestBean(hasToString("i ere i"));
+	}
+
+	@Test
+	public void can_match_non_string_bean_containing_several_things() {
+		TestBean bean = new TestBean("Able was I ere I saw Elba");
+		when(mock.doAThingWithATestBean(toStringContainsAllOf(bean.getClass(), "I ere I", " Elba", "was I")))
+				.thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
+	}
+
+	@Test
+	public void can_match_non_string_bean_containing_one_of_several_things() {
+		TestBean bean = new TestBean("Able was I ere I saw Elba");
+		when(mock.doAThingWithATestBean(toStringContainsOneOrMoreOf(bean.getClass(), "I ere I", " Elbow", "Fuzzy Wuzzy was a bear")))
+				.thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
+	}
+
 }
