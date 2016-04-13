@@ -4,11 +4,12 @@
 package com.github.aro_tech.extended_mockito;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import com.github.aro_tech.extended_mockito.util.StringUtil;
-import com.github.aro_tech.interface_it_ant.wrappers.MatchersMixin;
 
 /**
  * @author aro_tech
@@ -66,7 +67,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @param predicate
 	 * @return null
 	 */
-	default <T extends Object> List<T> allItemsMatch(Predicate<T> predicate) {
+	default <T extends Object> List<T> allListItemsMatch(Predicate<T> predicate) {
 		return argThat(new ListMatcher<T>() {
 			@Override
 			protected boolean evaluateStream(Stream<T> stream) {
@@ -83,7 +84,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 *            A lambda to evaluate a method argument
 	 * @return null
 	 */
-	default <T extends Object> List<T> oneOrMoreItemsMatch(Predicate<T> predicate) {
+	default <T extends Object> List<T> oneOrMoreListItemsMatch(Predicate<T> predicate) {
 		return argThat(new ListMatcher<T>() {
 			@Override
 			protected boolean evaluateStream(Stream<T> stream) {
@@ -92,6 +93,37 @@ public interface ExtendedMatchers extends MatchersMixin {
 		});
 	}
 
+	/**
+	 * Matcher for a map argument
+	 * @param predicate lambda for assessing the map argument
+	 * @return null
+	 */
+	default <K,V> Map<K,V> mapThat(Predicate<Map<K,V>> predicate) {
+		return argThat(map -> predicate.test((Map<K,V>) map));
+	}
+	
+	
+	/**
+	 * A predicate-based matcher for set arguments - all items must match
+	 * 
+	 * @param predicate
+	 * @return null
+	 */
+	default <T extends Object> Set<T> allSetItemsMatch(Predicate<T> predicate) {
+		return argThat(arg -> ((Set<T>) arg).stream().allMatch(predicate));
+	}
+
+	/**
+	 * A predicate-based matcher for set arguments - at least one of the items must match
+	 * 
+	 * @param predicate
+	 * @return null
+	 */
+	default <T extends Object> Set<T> oneOrMoreSetItemsMatch(Predicate<T> predicate) {
+		return argThat(arg -> ((Set<T>) arg).stream().anyMatch(predicate));
+	}
+
+	
 	/**
 	 * A predicate-based matcher for object arguments
 	 * 

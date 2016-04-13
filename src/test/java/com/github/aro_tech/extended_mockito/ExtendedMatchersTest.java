@@ -4,7 +4,13 @@
 package com.github.aro_tech.extended_mockito;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +23,16 @@ import com.github.aro_tech.extended_mockito.wrappers.AssertJ;
  * @author aro_tech
  *
  */
-public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
+public class ExtendedMatchersTest implements ExtendedMockito, AssertJ {
 
-	private static interface TestInterface {
+	protected static interface TestInterface {
 		public boolean doAThingWithAString(String arg);
 
 		public boolean doAThingWithAList(List<String> arg);
+
+		public boolean doAThingWithASet(Set<String> arg);
+
+		public boolean doAThingWithAMap(Map<String, TestBean> arg);
 
 		public boolean doAThingWithAnInt(int arg);
 
@@ -42,7 +52,7 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 
 	}
 
-	private static class TestBean {
+	protected static class TestBean {
 		String toStr;
 
 		/**
@@ -62,7 +72,7 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 		}
 	}
 
-	private TestInterface mock = mock(TestInterface.class);
+	protected TestInterface mock = mock(TestInterface.class);
 
 	/**
 	 * @throws java.lang.Exception
@@ -139,8 +149,8 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	}
 
 	@Test
-	public void allItemsMatch_can_match_list_containing_one_thing() {
-		when(mock.doAThingWithAList(allItemsMatch((str) -> true))).thenReturn(Boolean.TRUE);
+	public void allListItemsMatch_can_match_list_containing_one_thing() {
+		when(mock.doAThingWithAList(allListItemsMatch((str) -> true))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(new ArrayList<String>() {
 			{
 				this.add("item1");
@@ -149,8 +159,57 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	}
 
 	@Test
-	public void allItemsMatch_can_match_list_containing_several_things() {
-		when(mock.doAThingWithAList(allItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+	public void allSetItemsMatch_can_match_set_containing_one_thing() {
+		when(mock.doAThingWithASet(allSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithASet(setOf("football"))).isTrue();
+	}
+
+	@Test
+	public void allSetItemsMatch_can_match_set_containing_several_things() {
+		when(mock.doAThingWithASet(allSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithASet(setOf("football", "foolish", "food"))).isTrue();
+	}
+	
+	@Test
+	public void allSetItemsMatch_can_fail_to_match_set_containing_several_things() {
+		when(mock.doAThingWithASet(allSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithASet(setOf("football", "baseball", "food"))).isFalse();
+	}
+	
+	@Test
+	public void allSetItemsMatch_can_handle_null() {
+		when(mock.doAThingWithASet(allSetItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(null)).isFalse();
+	}
+	
+	@Test
+	public void oneOrMoreSetItemsMatch_can_match_set_containing_one_thing() {
+		when(mock.doAThingWithASet(oneOrMoreSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithASet(setOf("football"))).isTrue();
+	}
+
+	@Test
+	public void oneOrMoreSetItemsMatch_can_match_set_containing_several_things() {
+		when(mock.doAThingWithASet(oneOrMoreSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithASet(setOf("football", "baseball", "basketball"))).isTrue();
+	}
+	
+	@Test
+	public void oneOrMoreSetItemsMatch_can_fail_to_match_set_containing_several_things() {
+		when(mock.doAThingWithASet(oneOrMoreSetItemsMatch((str) -> str.startsWith("golf")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithASet(setOf("football", "baseball", "basketball"))).isFalse();
+	}
+	
+	@Test
+	public void oneOrMoreSetItemsMatch_can_handle_null() {
+		when(mock.doAThingWithASet(oneOrMoreSetItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(null)).isFalse();
+	}
+
+
+	@Test
+	public void allListItemsMatch_can_match_list_containing_several_things() {
+		when(mock.doAThingWithAList(allListItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(new ArrayList<String>() {
 			{
 				this.add("item1");
@@ -161,8 +220,8 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	}
 
 	@Test
-	public void allItemsMatch_can_fail_to_match_list_containing_several_things() {
-		when(mock.doAThingWithAList(allItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+	public void allListItemsMatch_can_fail_to_match_list_containing_several_things() {
+		when(mock.doAThingWithAList(allListItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(new ArrayList<String>() {
 			{
 				this.add("item1");
@@ -173,8 +232,8 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	}
 
 	@Test
-	public void oneOrMoreItemsMatch_can_match_list_containing_several_things() {
-		when(mock.doAThingWithAList(oneOrMoreItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+	public void oneOrMoreListItemsMatch_can_match_list_containing_several_things() {
+		when(mock.doAThingWithAList(oneOrMoreListItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(new ArrayList<String>() {
 			{
 				this.add("item1");
@@ -185,8 +244,8 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	}
 
 	@Test
-	public void oneOrMoreItemsMatch_can_fail_to_match_list_containing_several_things() {
-		when(mock.doAThingWithAList(oneOrMoreItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+	public void oneOrMoreListItemsMatch_can_fail_to_match_list_containing_several_things() {
+		when(mock.doAThingWithAList(oneOrMoreListItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(new ArrayList<String>() {
 			{
 				this.add("not item1");
@@ -197,14 +256,14 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	}
 
 	@Test
-	public void oneOrMoreItemsMatch_can_handle_null() {
-		when(mock.doAThingWithAList(oneOrMoreItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+	public void oneOrMoreListItemsMatch_can_handle_null() {
+		when(mock.doAThingWithAList(oneOrMoreListItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(null)).isFalse();
 	}
 
 	@Test
-	public void allItemsMatch_can_handle_null() {
-		when(mock.doAThingWithAList(allItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
+	public void allListItemsMatch_can_handle_null() {
+		when(mock.doAThingWithAList(allListItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(null)).isFalse();
 	}
 
@@ -339,8 +398,7 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 	@Test
 	public void can_match_non_string_bean_containing_several_things() {
 		TestBean bean = new TestBean("Able was I ere I saw Elba");
-		when(mock.doAThingWithATestBean(toStringContainsAllOf("I ere I", " Elba", "was I")))
-				.thenReturn(Boolean.TRUE);
+		when(mock.doAThingWithATestBean(toStringContainsAllOf("I ere I", " Elba", "was I"))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
 	}
 
@@ -351,5 +409,43 @@ public class ExtendedMockitoTest implements ExtendedMockito, AssertJ {
 				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
 	}
+	
+	@Test
+	public void can_match_map_item() {
+		when(mock.doAThingWithAMap(mapThat(map -> map.containsKey("foo")))).thenReturn(true);
+		assertThat(mock.doAThingWithAMap(mapOf(entry("foot","ball"),entry("foo","bar")))).isTrue();
+	}
 
+	protected Set<String> setOf(String... items) {
+		Set<String> set = new HashSet<>();
+		set.addAll(Arrays.asList(items));
+		return set;
+	}
+	
+	protected Entry<String, TestBean> entry(String key, String val) {
+		return new Entry<String, ExtendedMatchersTest.TestBean>() {
+			@Override
+			public TestBean setValue(TestBean value) {
+				return value;
+			}
+			
+			@Override
+			public TestBean getValue() {
+				return new TestBean(val);
+			}
+			
+			@Override
+			public String getKey() {
+				return key;
+			}
+		};
+	}
+	
+	protected Map<String, TestBean> mapOf(Entry<String, TestBean>... entries) {
+		Map<String, TestBean> map = new HashMap<>();
+		for(Entry<String, TestBean> entry: entries) {
+			map.put(entry.getKey(), entry.getValue());
+		}
+		return map;
+	}
 }

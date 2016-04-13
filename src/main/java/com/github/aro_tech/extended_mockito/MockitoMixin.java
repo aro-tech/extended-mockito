@@ -1,4 +1,4 @@
-package com.github.aro_tech.interface_it_ant.wrappers;
+package com.github.aro_tech.extended_mockito;
 
 import org.mockito.InOrder; 
 import org.mockito.MockSettings; 
