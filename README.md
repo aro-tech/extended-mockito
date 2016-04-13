@@ -3,16 +3,16 @@ Convenient extensions to the [Mockito] (http://mockito.org/) unit-testing mock o
 
 Requires Java 8 (or higher)
 
-Adds a mixin interface (built by [interface-it] (https://github.com/aro-tech/interface-it)) and extra matchers, including lambda-capable matchers.
+Adds a mixin interface (built by [interface-it] (https://github.com/aro-tech/interface-it)) called ExtendedMockito (and there is also ExtendedBDDMockito) and extra matchers, including lambda-capable matchers.
 
 ##Latest release
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|2.0.44-beta.2|jar)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|2.0.44-beta.3|jar)
 
-[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v2.0.44-beta.2) 
+[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v2.0.44-beta.3) 
 
-[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/2.0.44-beta.2)
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/2.0.44-beta.3)
 
-[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/2.0.44-beta.2/ "binaries")
+[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/2.0.44-beta.3/ "binaries")
 
 
 In Maven:
@@ -21,7 +21,7 @@ In Maven:
 <dependency>
   <groupId>com.github.aro-tech</groupId>
   <artifactId>extended-mockito</artifactId>
-  <version>2.0.44-beta.2</version>
+  <version>2.0.44-beta.3</version>
 </dependency>
 ```
 
@@ -52,7 +52,7 @@ when(mock.checkCVBuzzwords(toStringContainsOneOrMoreOf("SCRUM", "Kanban", "TDD",
 		verify(mock).doAThingWithABean(hasToString("[Employee] name=John Smith, group=R&D"));	
 ```
 
-See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/src/test/java/com/github/aro_tech/extended_mockito/ExtendedMockitoTest.java) for more examples.  
+See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/src/test/java/com/github/aro_tech/extended_mockito) for more examples.  
 
 ##List of added matchers:
 
@@ -63,9 +63,12 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
  * toStringContainsAllOf
  * toStringContainsOneOrMoreOf
  
-**Lambda Predicate matchers for lists**
- * allItemsMatch
- * oneOrMoreItemsMatch
+**Lambda Predicate matchers for collections**
+ * allListItemsMatch
+ * oneOrMoreListItemsMatch
+ * allSetItemsMatch
+ * oneOrMoreSetItemsMatch
+ * mapThat
 
 **Lambda Predicate matchers for objects and primitives**
 
