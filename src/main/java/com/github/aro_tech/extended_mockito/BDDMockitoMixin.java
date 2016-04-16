@@ -1,6 +1,6 @@
 package com.github.aro_tech.extended_mockito;
 
-import org.mockito.BDDMockito;
+import org.mockito.BDDMockito; 
 import org.mockito.stubbing.Answer; 
 
 /** 
@@ -12,6 +12,7 @@ public interface BDDMockitoMixin extends MockitoMixin {
 
 
     // CONSTANTS: 
+
 
     // DELEGATE METHODS: 
 
