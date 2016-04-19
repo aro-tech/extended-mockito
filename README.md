@@ -81,6 +81,12 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
  * floatMatches
  * byteMatches
  * charMatches
+ 
+ ##In progress for the next release:
+  * Fix deprecation of stubVoid() method (done)
+  * Added ExtendedMockito.captorOf() method to allow ArgumentCaptor construction with a little less typing (done)
+  
+  
 
 ##Blog
 [![The Green Bar](https://img.shields.io/badge/My_Blog:-The_Green_Bar-brightgreen.svg)](https://thegreenbar.wordpress.com/)
