@@ -6,13 +6,13 @@ Requires Java 8 (or higher)
 Adds a mixin interface (built by [interface-it] (https://github.com/aro-tech/interface-it)) called ExtendedMockito (and there is also ExtendedBDDMockito) and extra matchers, including lambda-capable matchers.
 
 ##Latest release
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|2.0.44-beta.3|jar)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|2.0.49-beta.1|jar)
 
-[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v2.0.44-beta.3) 
+[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v2.0.49-beta.1) 
 
-[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/2.0.44-beta.3)
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/2.0.49-beta.1)
 
-[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/2.0.44-beta.3/ "binaries")
+[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/2.0.49-beta.1/ "binaries")
 
 
 In Maven:
@@ -21,7 +21,7 @@ In Maven:
 <dependency>
   <groupId>com.github.aro-tech</groupId>
   <artifactId>extended-mockito</artifactId>
-  <version>2.0.44-beta.3</version>
+  <version>2.0.49-beta.1</version>
 </dependency>
 ```
 
@@ -80,12 +80,7 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
  * doubleMatches
  * floatMatches
  * byteMatches
- * charMatches
- 
- ##In progress for the next release:
-  * Fix deprecation of stubVoid() method (done)
-  * Added ExtendedMockito.captorOf() method to allow ArgumentCaptor construction with a little less typing (done)
-  
+ * charMatches 
   
 
 ##Blog
