@@ -22,6 +22,7 @@ In Maven:
   <groupId>com.github.aro-tech</groupId>
   <artifactId>extended-mockito</artifactId>
   <version>2.0.52-beta.1</version>
+  <scope>test</scope>
 </dependency>
 ```
 
