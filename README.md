@@ -53,6 +53,10 @@ when(mock.checkCVBuzzwords(toStringContainsOneOrMoreOf("SCRUM", "Kanban", "TDD",
 		verify(mock).doAThingWithABean(hasToString("[Employee] name=John Smith, group=R&D"));	
 ```
 
+```
+when(mock.doAThingWithAList(listContainsExactlyInAnyOrder("Parsley", "Rosemary", "Sage", "Thyme"))).thenReturn(Boolean.TRUE);
+```
+
 See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/src/test/java/com/github/aro_tech/extended_mockito) for more examples.  
 
 ##List of added matchers:
@@ -70,7 +74,10 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
  * allSetItemsMatch
  * oneOrMoreSetItemsMatch
  * mapThat
-
+ 
+ **Other matchers for collections**
+ * listContainsExactlyInAnyOrder
+ 
 **Lambda Predicate matchers for objects and primitives**
 
 *Mockito already accepts lambdas for argThat(), intThat(), etc. but does not accept Predicate instances, and the lambdas accepted by argThat(), intThat() etc. require type casts. The following methods accept a Predicate instance or a lambda without the need for a type cast.*

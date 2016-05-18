@@ -169,19 +169,19 @@ public class ExtendedMatchersTest implements ExtendedMockito, AssertJ {
 		when(mock.doAThingWithASet(allSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithASet(setOf("football", "foolish", "food"))).isTrue();
 	}
-	
+
 	@Test
 	public void allSetItemsMatch_can_fail_to_match_set_containing_several_things() {
 		when(mock.doAThingWithASet(allSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithASet(setOf("football", "baseball", "food"))).isFalse();
 	}
-	
+
 	@Test
 	public void allSetItemsMatch_can_handle_null() {
 		when(mock.doAThingWithASet(allSetItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(null)).isFalse();
 	}
-	
+
 	@Test
 	public void oneOrMoreSetItemsMatch_can_match_set_containing_one_thing() {
 		when(mock.doAThingWithASet(oneOrMoreSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
@@ -193,19 +193,18 @@ public class ExtendedMatchersTest implements ExtendedMockito, AssertJ {
 		when(mock.doAThingWithASet(oneOrMoreSetItemsMatch((str) -> str.startsWith("foo")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithASet(setOf("football", "baseball", "basketball"))).isTrue();
 	}
-	
+
 	@Test
 	public void oneOrMoreSetItemsMatch_can_fail_to_match_set_containing_several_things() {
 		when(mock.doAThingWithASet(oneOrMoreSetItemsMatch((str) -> str.startsWith("golf")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithASet(setOf("football", "baseball", "basketball"))).isFalse();
 	}
-	
+
 	@Test
 	public void oneOrMoreSetItemsMatch_can_handle_null() {
 		when(mock.doAThingWithASet(oneOrMoreSetItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAList(null)).isFalse();
 	}
-
 
 	@Test
 	public void allListItemsMatch_can_match_list_containing_several_things() {
@@ -409,11 +408,74 @@ public class ExtendedMatchersTest implements ExtendedMockito, AssertJ {
 				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
 	}
-	
+
 	@Test
 	public void can_match_map_item() {
 		when(mock.doAThingWithAMap(mapThat(map -> map.containsKey("foo")))).thenReturn(true);
-		assertThat(mock.doAThingWithAMap(mapOf(entry("foot","ball"),entry("foo","bar")))).isTrue();
+		assertThat(mock.doAThingWithAMap(mapOf(entry("foot", "ball"), entry("foo", "bar")))).isTrue();
+	}
+
+	@Test
+	public void can_match_exact_list_content_with_lenient_order() {
+		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder("A", "B", "C", "D"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(Arrays.asList("A", "B", "C", "D"))).isTrue();
+		assertThat(mock.doAThingWithAList(Arrays.asList("C", "D", "A", "B"))).isTrue();
+		assertThat(mock.doAThingWithAList(Arrays.asList("B", "C", "A", "D"))).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_exact_list_content_with_lenient_order() {
+		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder("A", "B", "C", "D"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(Arrays.asList("A", "B", "C", "D", "E"))).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList("C", "D", "A"))).isFalse();
+		assertThat(mock.doAThingWithAList(new ArrayList<>())).isFalse();
+	}
+
+	@Test
+	public void can_fail_to_match_exact_list_content_with_lenient_order_using_null() {
+		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder("A", "B", "C", "D"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(null)).isFalse();
+	}
+
+	@Test
+	public void listContainsExactlyInAnyOrder_can_expect_empty_list() {
+		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder())).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(new ArrayList<>())).isTrue();
+		assertThat(mock.doAThingWithAList(null)).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList("C", "D", "A"))).isFalse();
+	}
+
+	@Test
+	public void listContainsExactlyInAnyOrder_can_handle_multiple_null_expected_item() {
+		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder(null, null))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(new ArrayList<>())).isFalse();
+		assertThat(mock.doAThingWithAList(null)).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList("C", "D", "A"))).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList(null, null))).isTrue();
+	}
+
+	@Test
+	public void listContainsExactlyInAnyOrder_can_handle_single_null_expected_item() {
+		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder((String) null))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(new ArrayList<>())).isFalse();
+		assertThat(mock.doAThingWithAList(null)).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList("C", "D", "A"))).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList(null, null))).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList((String) null))).isTrue();
+	}
+
+	/**
+	 * Strange case where the Java compiler interprets varargs as a null array
+	 * instead of an array with one null item
+	 * The expected behavior should be the same as if it's an array with one null item
+	 */
+	@Test
+	public void listContainsExactlyInAnyOrder_can_handle_single_null_expected_item_without_cast() {
+		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder(null))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAList(new ArrayList<>())).isFalse();
+		assertThat(mock.doAThingWithAList(null)).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList("C", "D", "A"))).isFalse();
+		assertThat(mock.doAThingWithAList(Arrays.asList((String) null))).isTrue();
 	}
 
 	protected Set<String> setOf(String... items) {
@@ -421,29 +483,29 @@ public class ExtendedMatchersTest implements ExtendedMockito, AssertJ {
 		set.addAll(Arrays.asList(items));
 		return set;
 	}
-	
+
 	protected Entry<String, TestBean> entry(String key, String val) {
 		return new Entry<String, ExtendedMatchersTest.TestBean>() {
 			@Override
 			public TestBean setValue(TestBean value) {
 				return value;
 			}
-			
+
 			@Override
 			public TestBean getValue() {
 				return new TestBean(val);
 			}
-			
+
 			@Override
 			public String getKey() {
 				return key;
 			}
 		};
 	}
-	
+
 	protected Map<String, TestBean> mapOf(Entry<String, TestBean>... entries) {
 		Map<String, TestBean> map = new HashMap<>();
-		for(Entry<String, TestBean> entry: entries) {
+		for (Entry<String, TestBean> entry : entries) {
 			map.put(entry.getKey(), entry.getValue());
 		}
 		return map;
