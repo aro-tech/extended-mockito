@@ -5,10 +5,8 @@ import org.mockito.MockSettings;
 import org.mockito.MockingDetails; 
 import org.mockito.Mockito; 
 import org.mockito.stubbing.Answer; 
-import org.mockito.stubbing.DeprecatedOngoingStubbing; 
 import org.mockito.stubbing.OngoingStubbing; 
 import org.mockito.stubbing.Stubber; 
-import org.mockito.stubbing.VoidMethodStubbable; 
 import org.mockito.verification.VerificationAfterDelay; 
 import org.mockito.verification.VerificationMode; 
 import org.mockito.verification.VerificationWithTimeout; 
@@ -310,26 +308,6 @@ public interface MockitoMixin extends MatchersMixin {
      */
     default <T> T spy(T object) {
         return Mockito.spy(object);
-    }
-
-
-
-    /**
-     * Delegate call to public static <T> org.mockito.stubbing.DeprecatedOngoingStubbing<T> org.mockito.Mockito.stub(T)
-     * {@link org.mockito.Mockito#stub(java.lang.Object)}
-     */
-    default <T> DeprecatedOngoingStubbing<T> stub(T methodCall) {
-        return Mockito.stub(methodCall);
-    }
-
-
-
-    /**
-     * Delegate call to public static <T> org.mockito.stubbing.VoidMethodStubbable<T> org.mockito.Mockito.stubVoid(T)
-     * {@link org.mockito.Mockito#stubVoid(java.lang.Object)}
-     */
-    default <T> VoidMethodStubbable<T> stubVoid(T mock) {
-        return Mockito.stubVoid(mock);
     }
 
 
