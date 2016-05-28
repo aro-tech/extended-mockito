@@ -3,7 +3,6 @@
  */
 package com.github.aro_tech.extended_mockito;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.github.aro_tech.extended_mockito.wrappers.JUnitAssert;
@@ -12,17 +11,17 @@ import com.github.aro_tech.extended_mockito.wrappers.JUnitAssert;
  * @author aro_tech
  *
  */
-public class ExtendedBDDMockitoTest extends ExtendedMatchersTest implements ExtendedBDDMockito, JUnitAssert {
+public class ExtendedBDDMockitoTest extends AbstractMockingTest implements ExtendedBDDMockito, JUnitAssert {
 
 	/* (non-Javadoc)
-	 * @see com.github.aro_tech.extended_mockito.ExtendedMatchersTest#setUp()
+	 * @see com.github.aro_tech.extended_mockito.AbstractMockingTest#makeMock()
 	 */
 	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
+	protected TestInterface makeMock() {
+		return mock(TestInterface.class);
 	}
 
+	
 	/**
 	 * Test method for {@link com.github.aro_tech.extended_mockito.BDDMockitoMixin#given(java.lang.Object)}.
 	 */

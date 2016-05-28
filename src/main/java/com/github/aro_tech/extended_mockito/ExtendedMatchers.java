@@ -3,15 +3,11 @@
  */
 package com.github.aro_tech.extended_mockito;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-
-import org.mockito.ArgumentMatcher;
 
 import com.github.aro_tech.extended_mockito.util.StringUtil;
 
@@ -96,6 +92,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 			}
 		});
 	}
+	
 
 	/**
 	 * Lenient-order list matcher For a match, the list argument encountered by
@@ -107,42 +104,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return null
 	 */
 	default <T extends Object> List<T> listContainsExactlyInAnyOrder(T... items) {
-		return argThat(new ArgumentMatcher<List<T>>() {
-
-			@Override
-			public boolean matches(Object argument) {
-
-				if (null != argument) {
-					List<T> receivedList = (List<T>) argument;
-					if (null == items) { // strange case of un-casted null in varargs
-						return receivedListContainsOneNullItem(receivedList);
-					}
-					if (items.length == receivedList.size()) {
-						return containsSameItemsInAnyOrder(receivedList, items);
-					}
-				}
-				return false;
-			}
-
-			private <T> boolean containsSameItemsInAnyOrder(List<T> receivedList, T... items) {
-				Set<T> expected = new HashSet<T>(Arrays.asList(items));
-				for (T received : receivedList) {
-					if (!expected.contains(received)) {
-						return false;
-					}
-				}
-				return true;
-			}
-
-			private <T> boolean receivedListContainsOneNullItem(List<T> receivedList) {
-				if (receivedList.size() == 1 && null == receivedList.get(0)) {
-					return true; // matches because we're expecting a
-									// list with exactly 1 item, which is null
-				}
-				return false;
-			}
-
-		});
+		return argThat(new LenientOrderListMatcher<>(items));
 	}
 
 	/**
