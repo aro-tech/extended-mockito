@@ -414,8 +414,8 @@ public interface MatchersMixin {
      * Delegate call to public static <T> T org.mockito.Matchers.isA(java.lang.Class<T>)
      * {@link org.mockito.Matchers#isA(java.lang.Class)}
      */
-    default <T> T isA(Class<T> clazz) {
-        return Matchers.isA(clazz);
+    default <T> T isA(Class<T> type) {
+        return Matchers.isA(type);
     }
 
 
