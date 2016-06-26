@@ -37,20 +37,20 @@ public interface BDDMockitoMixin extends MockitoMixin {
 
 
     /**
-     * Delegate call to public static org.mockito.BDDMockito$BDDStubber org.mockito.BDDMockito.will(org.mockito.stubbing.Answer)
+     * Delegate call to public static org.mockito.BDDMockito$BDDStubber org.mockito.BDDMockito.will(org.mockito.stubbing.Answer<?>)
      * {@link org.mockito.BDDMockito#will(org.mockito.stubbing.Answer)}
      */
-    default BDDMockito.BDDStubber will(Answer answer) {
+    default BDDMockito.BDDStubber will(Answer<?> answer) {
         return BDDMockito.will(answer);
     }
 
 
 
     /**
-     * Delegate call to public static org.mockito.BDDMockito$BDDStubber org.mockito.BDDMockito.willAnswer(org.mockito.stubbing.Answer)
+     * Delegate call to public static org.mockito.BDDMockito$BDDStubber org.mockito.BDDMockito.willAnswer(org.mockito.stubbing.Answer<?>)
      * {@link org.mockito.BDDMockito#willAnswer(org.mockito.stubbing.Answer)}
      */
-    default BDDMockito.BDDStubber willAnswer(Answer answer) {
+    default BDDMockito.BDDStubber willAnswer(Answer<?> answer) {
         return BDDMockito.willAnswer(answer);
     }
 
