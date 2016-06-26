@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import org.mockito.ArgumentMatcher;
+
 import com.github.aro_tech.extended_mockito.util.StringUtil;
 
 /**
@@ -157,6 +159,44 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 */
 	default <T> T objectMatches(Predicate<T> predicate) {
 		return argThat((argument) -> predicate.test((T) argument));
+	}
+
+	/**
+	 * A predicate-based matcher for object arguments
+	 * 
+	 * Effectively, it's equivalent to argThat(), but objectMatches can accept a
+	 * Predicate instance which can be reused in a variable outside of Mockito,
+	 * whereas argThat can accept as its argument a lambda, but not a Predicate.
+	 * 
+	 * DO NOT USE THIS FOR PRIMITIVE ARGUMENTS such as int, double, etc.
+	 * 
+	 * Use intMatches, doubleMatches, etc. instead, because Mockito doesn't
+	 * always handle autoboxing well
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @param description Will appear in verify() failure messages
+	 * @return null
+	 */
+	default <T> T objectMatches(Predicate<T> predicate, String description) {
+		return argThat(new ArgumentMatcher<T>() {
+			/* (non-Javadoc)
+			 * @see org.mockito.ArgumentMatcher#matches(java.lang.Object)
+			 */
+			@Override
+			public boolean matches(Object argument) {
+				return predicate.test((T)argument);
+			}
+
+			/* (non-Javadoc)
+			 * @see java.lang.Object#toString()
+			 */
+			@Override
+			public String toString() {
+				// TODO Auto-generated method stub
+				return description;
+			}
+		});
 	}
 
 	/**

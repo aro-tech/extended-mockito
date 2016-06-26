@@ -223,6 +223,13 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 	}
 
 	@Test
+	public void objectMatches_can_match_with_description() {
+		when(mock.doAThingWithAString(objectMatches((str) -> str.length() < 3, "A short String"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAString("Hi")).isTrue();
+	}
+
+	
+	@Test
 	public void objectMatches_can_fail_to_match() {
 		when(mock.doAThingWithAString(objectMatches((str) -> str.equals("Bye")))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAString("Hi")).isFalse();
