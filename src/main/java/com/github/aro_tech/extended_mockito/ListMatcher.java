@@ -17,23 +17,25 @@ import org.mockito.ArgumentMatcher;
  */
 public abstract class ListMatcher<T> implements ArgumentMatcher<List<T>> {
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	
+	/* (non-Javadoc)
 	 * @see org.mockito.ArgumentMatcher#matches(java.lang.Object)
 	 */
 	@Override
-	public boolean matches(Object argument) {
+	public boolean matches(List<T> argument) {
 		if (null == argument) {
 			return false;
 		}
 		Stream<T> stream = listToStream(argument);
 		return evaluateStream(stream);
 	}
+	
+	
 
 	protected abstract boolean evaluateStream(Stream<T> stream);
 
-	private Stream<T> listToStream(Object argument) {
-		return ((List<T>) argument).stream();
+	private Stream<T> listToStream(List<T> argument) {
+		return argument.stream();
 	}
 }

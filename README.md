@@ -80,8 +80,9 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
  
 **Lambda Predicate matchers for objects and primitives**
 
-*Mockito already accepts lambdas for argThat(), intThat(), etc. but does not accept Predicate instances, and the lambdas accepted by argThat(), intThat() etc. require type casts. The following methods accept a Predicate instance or a lambda without the need for a type cast.*
+*Mockito already accepts lambdas for argThat(), intThat(), etc. but does not accept Predicate instances, and the lambdas accepted by argThat(), intThat() etc. require type casts (Note - this seems to be an area which is rapidly changing in the 2.0.XX betas of Mockito). The following methods accept a Predicate instance or a lambda without the need for a type cast.*
  * objectMatches (use only for objects, not for auto-boxed primitive types)
+   Note that now there is an objectMatches() call which accepts, in addition to the lambda, a description argument that appears in verify() failure messages.
  * intMatches
  * longMatches
  * shortMatches

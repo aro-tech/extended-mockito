@@ -29,14 +29,15 @@ public class LenientOrderListMatcher<T>  implements ArgumentMatcher<List<T>> {
 		this.items = items;
 	}
 	
-	/**
-	 * Match for any list containing the same items, in any order
+	
+	
+	/* (non-Javadoc)
+	 * @see org.mockito.ArgumentMatcher#matches(java.lang.Object)
 	 */
 	@Override
-	public boolean matches(Object argument) {
-
+	public boolean matches(List<T> argument) {
 		if (null != argument) {
-			List<T> receivedList = (List<T>) argument;
+			List<T> receivedList = argument;
 			if (null == items) { // strange case of un-casted null in varargs
 				return receivedListContainsOneNullItem(receivedList);
 			}
@@ -47,7 +48,7 @@ public class LenientOrderListMatcher<T>  implements ArgumentMatcher<List<T>> {
 		return false;
 	}
 
-	private <T> boolean containsSameItemsInAnyOrder(List<T> receivedList, T... items) {
+	private boolean containsSameItemsInAnyOrder(List<T> receivedList, T... items) {
 		Set<T> expected = new HashSet<>(Arrays.asList(items));
 		for (T received : receivedList) {
 			if (!expected.contains(received)) {
@@ -57,7 +58,7 @@ public class LenientOrderListMatcher<T>  implements ArgumentMatcher<List<T>> {
 		return true;
 	}
 
-	private <T> boolean receivedListContainsOneNullItem(List<T> receivedList) {
+	private boolean receivedListContainsOneNullItem(List<T> receivedList) {
 		if (receivedList.size() == 1 && null == receivedList.get(0)) {
 			return true; // matches because we're expecting a
 							// list with exactly 1 item, which is null
