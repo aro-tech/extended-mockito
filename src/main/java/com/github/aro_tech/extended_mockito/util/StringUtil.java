@@ -51,6 +51,38 @@ public class StringUtil {
 		return false;
 	}
 	
+	/**
+	 * Pretty print an array of CharSequence items
+	 * @param seq
+	 * @return Comma-delimited list
+	 */
+	public static String charSequenceArrayToString(CharSequence...seq) {
+		if(null == seq) {
+			return "null";
+		}
+		return "[" + String.join(",", seq) + "]";
+	}
+	
+	/**
+	 * Pretty print an array of objects of type T
+	 * @param seq
+	 * @return delimited list
+	 */
+	public static <T> String arrayToString(T[] items, String delimiter) {
+		if(null == items) {
+			return "null";
+		}
+		StringBuilder buf = new StringBuilder();
+		for(T cur: items) {
+			if(buf.length() > 0) {
+				buf.append(delimiter);
+			}
+			buf.append(cur.toString());
+		}
+		
+		return buf.toString();
+	}
+	
 	private static boolean anyIsNull(Object...args) {
 		for(Object arg: args) {
 			if(null == arg) {

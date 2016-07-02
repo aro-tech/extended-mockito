@@ -10,6 +10,8 @@ import java.util.Set;
 
 import org.mockito.ArgumentMatcher;
 
+import com.github.aro_tech.extended_mockito.util.StringUtil;
+
 /**
  * Mockito argument matcher for order-insensitive list matching
  * @author aro_tech
@@ -65,5 +67,17 @@ public class LenientOrderListMatcher<T>  implements ArgumentMatcher<List<T>> {
 		}
 		return false;
 	}
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[List in any order of: " + StringUtil.arrayToString(items, ", ") + "]";
+	}
+	
+	
 
 }

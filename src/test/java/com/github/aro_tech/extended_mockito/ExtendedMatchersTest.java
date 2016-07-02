@@ -191,7 +191,7 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 			}
 		})).isTrue();
 	}
-
+	
 	@Test
 	public void oneOrMoreListItemsMatch_can_fail_to_match_list_containing_several_things() {
 		when(mock.doAThingWithAList(oneOrMoreListItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
@@ -248,8 +248,21 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 	}
 
 	@Test
+	public void can_match_int_with_desc() {
+		when(mock.doAThingWithAnInt(intMatches((val) -> val > 100, ">100"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAnInt(111)).isTrue();
+	}
+
+	
+	@Test
 	public void can_fail_to_match_int() {
 		when(mock.doAThingWithAnInt(intMatches((val) -> val < 100))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAnInt(111)).isFalse();
+	}
+
+	@Test
+	public void can_fail_to_match_int_with_desc() {
+		when(mock.doAThingWithAnInt(intMatches((val) -> val < 100, ">100"))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAnInt(111)).isFalse();
 	}
 
@@ -266,6 +279,20 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 	}
 
 	@Test
+	public void can_match_double_with_desc() {
+		when(mock.doAThingWithADouble(doubleMatches((val) -> val > 100, ">100"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithADouble(111.1)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_double_with_desc() {
+		when(mock.doAThingWithADouble(doubleMatches((val) -> val < Math.PI, "<PI"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithADouble(111.1)).isFalse();
+	}
+
+	
+	
+	@Test
 	public void can_match_float() {
 		when(mock.doAThingWithAFloat(floatMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAFloat(111.1F)).isTrue();
@@ -277,6 +304,19 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		assertThat(mock.doAThingWithAFloat(111.1F)).isFalse();
 	}
 
+	@Test
+	public void can_match_float_with_desc() {
+		when(mock.doAThingWithAFloat(floatMatches((val) -> val > 100, ">100"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAFloat(111.1F)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_float_with_desc() {
+		when(mock.doAThingWithAFloat(floatMatches((val) -> val < Math.PI,"<PI"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAFloat(111.1F)).isFalse();
+	}
+
+	
 	@Test
 	public void can_match_short() {
 		when(mock.doAThingWithAShort(shortMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
@@ -290,6 +330,19 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 	}
 
 	@Test
+	public void can_match_short_with_desc() {
+		when(mock.doAThingWithAShort(shortMatches((val) -> val > 100, ">100"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAShort((short) 111)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_short_with_desc() {
+		when(mock.doAThingWithAShort(shortMatches((val) -> val < 100, "<100"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithAShort((short) 111)).isFalse();
+	}
+
+	
+	@Test
 	public void can_match_long() {
 		when(mock.doAThingWithALong(longMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithALong(111L)).isTrue();
@@ -301,6 +354,19 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		assertThat(mock.doAThingWithALong(111L)).isFalse();
 	}
 
+	@Test
+	public void can_match_long_with_desc() {
+		when(mock.doAThingWithALong(longMatches((val) -> val > 100,">100"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithALong(111L)).isTrue();
+	}
+
+	@Test
+	public void can_fail_to_match_long_with_desc() {
+		when(mock.doAThingWithALong(longMatches((val) -> val < 100,"<100"))).thenReturn(Boolean.TRUE);
+		assertThat(mock.doAThingWithALong(111L)).isFalse();
+	}
+
+	
 	@Test
 	public void can_match_byte() {
 		when(mock.doAThingWithAByte(byteMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
@@ -334,7 +400,7 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
 		verify(mock).doAThingWithATestBean(hasToString(bean.toString()));
 	}
-
+	
 	@Test
 	public void can_fail_to_match_based_on_exact_tostring() {
 		TestBean bean = new TestBean("able was i ere i saw elba");
@@ -364,14 +430,21 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		when(mock.doAThingWithATestBean(toStringContainsOneOrMoreOf("I ere I", " Elbow", "Fuzzy Wuzzy was a bear")))
 				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
-	}
-
+	}	
+	
 	@Test
 	public void can_match_map_item() {
 		when(mock.doAThingWithAMap(mapThat(map -> map.containsKey("foo")))).thenReturn(true);
 		assertThat(mock.doAThingWithAMap(mapOf(entry("foot", "ball"), entry("foo", "bar")))).isTrue();
 	}
 
+	@Test
+	public void can_match_map_item_with_desc() {
+		when(mock.doAThingWithAMap(mapThat(map -> map.containsKey("foo"), "Map containing foo"))).thenReturn(true);
+		assertThat(mock.doAThingWithAMap(mapOf(entry("foot", "ball"), entry("foo", "bar")))).isTrue();
+	}
+
+	
 	@Test
 	public void can_match_exact_list_content_with_lenient_order() {
 		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder("A", "B", "C", "D"))).thenReturn(Boolean.TRUE);
