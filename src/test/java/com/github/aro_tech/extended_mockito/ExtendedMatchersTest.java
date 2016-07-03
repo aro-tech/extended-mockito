@@ -23,7 +23,9 @@ import com.github.aro_tech.extended_mockito.wrappers.AssertJ;
  */
 public class ExtendedMatchersTest extends AbstractMockingTest implements ExtendedMockito, AssertJ {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.github.aro_tech.extended_mockito.AbstractMockingTest#makeMock()
 	 */
 	@Override
@@ -191,7 +193,7 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 			}
 		})).isTrue();
 	}
-	
+
 	@Test
 	public void oneOrMoreListItemsMatch_can_fail_to_match_list_containing_several_things() {
 		when(mock.doAThingWithAList(oneOrMoreListItemsMatch((str) -> str.startsWith("item")))).thenReturn(Boolean.TRUE);
@@ -220,15 +222,17 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 	public void objectMatches_can_match() {
 		when(mock.doAThingWithAString(objectMatches((str) -> str.length() < 3))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAString("Hi")).isTrue();
+		verify(mock).doAThingWithAString(objectMatches((str) -> str.length() < 4));
 	}
 
 	@Test
 	public void objectMatches_can_match_with_description() {
-		when(mock.doAThingWithAString(objectMatches((str) -> str.length() < 3, "A short String"))).thenReturn(Boolean.TRUE);
+		when(mock.doAThingWithAString(objectMatches((str) -> str.length() < 3, "A short String")))
+				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAString("Hi")).isTrue();
+		verify(mock).doAThingWithAString(objectMatches((str) -> str.length() == 2, "A String w/ length 2"));
 	}
 
-	
 	@Test
 	public void objectMatches_can_fail_to_match() {
 		when(mock.doAThingWithAString(objectMatches((str) -> str.equals("Bye")))).thenReturn(Boolean.TRUE);
@@ -253,7 +257,6 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		assertThat(mock.doAThingWithAnInt(111)).isTrue();
 	}
 
-	
 	@Test
 	public void can_fail_to_match_int() {
 		when(mock.doAThingWithAnInt(intMatches((val) -> val < 100))).thenReturn(Boolean.TRUE);
@@ -290,8 +293,6 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		assertThat(mock.doAThingWithADouble(111.1)).isFalse();
 	}
 
-	
-	
 	@Test
 	public void can_match_float() {
 		when(mock.doAThingWithAFloat(floatMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
@@ -312,11 +313,10 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 
 	@Test
 	public void can_fail_to_match_float_with_desc() {
-		when(mock.doAThingWithAFloat(floatMatches((val) -> val < Math.PI,"<PI"))).thenReturn(Boolean.TRUE);
+		when(mock.doAThingWithAFloat(floatMatches((val) -> val < Math.PI, "<PI"))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAFloat(111.1F)).isFalse();
 	}
 
-	
 	@Test
 	public void can_match_short() {
 		when(mock.doAThingWithAShort(shortMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
@@ -341,7 +341,6 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		assertThat(mock.doAThingWithAShort((short) 111)).isFalse();
 	}
 
-	
 	@Test
 	public void can_match_long() {
 		when(mock.doAThingWithALong(longMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
@@ -356,17 +355,16 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 
 	@Test
 	public void can_match_long_with_desc() {
-		when(mock.doAThingWithALong(longMatches((val) -> val > 100,">100"))).thenReturn(Boolean.TRUE);
+		when(mock.doAThingWithALong(longMatches((val) -> val > 100, ">100"))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithALong(111L)).isTrue();
 	}
 
 	@Test
 	public void can_fail_to_match_long_with_desc() {
-		when(mock.doAThingWithALong(longMatches((val) -> val < 100,"<100"))).thenReturn(Boolean.TRUE);
+		when(mock.doAThingWithALong(longMatches((val) -> val < 100, "<100"))).thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithALong(111L)).isFalse();
 	}
 
-	
 	@Test
 	public void can_match_byte() {
 		when(mock.doAThingWithAByte(byteMatches((val) -> val > 100))).thenReturn(Boolean.TRUE);
@@ -384,6 +382,7 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		when(mock.doAThingWithAChar(charMatches((val) -> Character.isAlphabetic(val.charValue()))))
 				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithAChar('c')).isTrue();
+		verify(mock).doAThingWithAChar(charMatches((val) -> Character.isAlphabetic(val.charValue()), "alpha char"));
 	}
 
 	@Test
@@ -400,7 +399,7 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
 		verify(mock).doAThingWithATestBean(hasToString(bean.toString()));
 	}
-	
+
 	@Test
 	public void can_fail_to_match_based_on_exact_tostring() {
 		TestBean bean = new TestBean("able was i ere i saw elba");
@@ -430,8 +429,8 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		when(mock.doAThingWithATestBean(toStringContainsOneOrMoreOf("I ere I", " Elbow", "Fuzzy Wuzzy was a bear")))
 				.thenReturn(Boolean.TRUE);
 		assertThat(mock.doAThingWithATestBean(bean)).isTrue();
-	}	
-	
+	}
+
 	@Test
 	public void can_match_map_item() {
 		when(mock.doAThingWithAMap(mapThat(map -> map.containsKey("foo")))).thenReturn(true);
@@ -444,7 +443,6 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 		assertThat(mock.doAThingWithAMap(mapOf(entry("foot", "ball"), entry("foo", "bar")))).isTrue();
 	}
 
-	
 	@Test
 	public void can_match_exact_list_content_with_lenient_order() {
 		when(mock.doAThingWithAList(listContainsExactlyInAnyOrder("A", "B", "C", "D"))).thenReturn(Boolean.TRUE);
@@ -496,8 +494,8 @@ public class ExtendedMatchersTest extends AbstractMockingTest implements Extende
 
 	/**
 	 * Strange case where the Java compiler interprets varargs as a null array
-	 * instead of an array with one null item
-	 * The expected behavior should be the same as if it's an array with one null item
+	 * instead of an array with one null item The expected behavior should be
+	 * the same as if it's an array with one null item
 	 */
 	@Test
 	public void listContainsExactlyInAnyOrder_can_handle_single_null_expected_item_without_cast() {

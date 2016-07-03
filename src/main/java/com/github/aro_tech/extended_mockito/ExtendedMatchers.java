@@ -346,7 +346,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return null
 	 */
 	default <T> T objectMatches(Predicate<T> predicate) {
-		return argThat((argument) -> predicate.test((T) argument));
+		return objectMatches(predicate, "{object matching the given predicate}");//argThat((argument) -> predicate.test((T) argument));
 	}
 
 	/**
@@ -386,7 +386,6 @@ public interface ExtendedMatchers extends MatchersMixin {
 			 */
 			@Override
 			public String toString() {
-				// TODO Auto-generated method stub
 				return description;
 			}
 		});
@@ -400,7 +399,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return 0
 	 */
 	default int intMatches(Predicate<Integer> predicate) {
-		return intThat((argument) -> predicate.test((int) argument));
+		return intMatches(predicate, "<int matching the given predicate>");
 	}
 
 	/**
@@ -445,7 +444,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return 0
 	 */
 	default double doubleMatches(Predicate<Double> predicate) {
-		return doubleThat((argument) -> predicate.test((double) argument));
+		return doubleMatches(predicate, "<double matching the given predicate>");
 	}
 
 	/**
@@ -490,7 +489,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return 0
 	 */
 	default float floatMatches(Predicate<Float> predicate) {
-		return floatThat((argument) -> predicate.test((float) argument));
+		return floatMatches(predicate, "<float matching the given predicate>");
 	}
 
 	/**
@@ -535,7 +534,8 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return 0
 	 */
 	default short shortMatches(Predicate<Short> predicate) {
-		return shortThat((argument) -> predicate.test((short) argument));
+		return shortMatches(predicate, "<short matching the given predicate>");
+
 	}
 
 	/**
@@ -580,7 +580,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return 0
 	 */
 	default long longMatches(Predicate<Long> predicate) {
-		return longThat((argument) -> predicate.test((long) argument));
+		return longMatches(predicate, "<long matching the given predicate>");
 	}
 
 	/**
@@ -625,7 +625,7 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return 0
 	 */
 	default byte byteMatches(Predicate<Byte> predicate) {
-		return byteThat((argument) -> predicate.test((byte) argument));
+		return byteMatches(predicate, "<byte matching the given predicate>");
 	}
 
 	/**
@@ -670,8 +670,40 @@ public interface ExtendedMatchers extends MatchersMixin {
 	 * @return 0
 	 */
 	default char charMatches(Predicate<Character> predicate) {
-		return charThat((argument) -> predicate.test((char) argument));
+		return charMatches(predicate, "<char matching the given predicate>");
 	}
+	
+	/**
+	 * A predicate-based matcher for primitive char arguments
+	 * 
+	 * @param predicate
+	 *            A lambda to evaluate a method argument
+	 * @param description
+	 *            Description of expected argument - will appear in verify()
+	 *            failures
+	 * @return 0
+	 */
+	default char charMatches(Predicate<Character> predicate, final String description) {
+		return charThat(new ArgumentMatcher<Character>() {
+
+			/* (non-Javadoc)
+			 * @see org.mockito.ArgumentMatcher#matches(java.lang.Object)
+			 */
+			@Override
+			public boolean matches(Character argument) {
+				return null != argument && predicate.test(argument);
+			}
+
+			/* (non-Javadoc)
+			 * @see java.lang.Object#toString()
+			 */
+			@Override
+			public String toString() {
+				return description;
+			}
+		});
+	}
+
 
 	/**
 	 * Match based on exact toString() of the argument
