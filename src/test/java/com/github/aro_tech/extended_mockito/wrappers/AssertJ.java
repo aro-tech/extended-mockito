@@ -23,7 +23,13 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt; 
 import java.util.OptionalLong; 
 import java.util.concurrent.CompletableFuture; 
+import java.util.function.DoublePredicate; 
+import java.util.function.Function; 
+import java.util.function.IntPredicate; 
+import java.util.function.LongPredicate; 
+import java.util.function.Predicate; 
 import java.util.stream.Stream; 
+import org.assertj.core.api.AbstractAssert; 
 import org.assertj.core.api.AbstractBigDecimalAssert; 
 import org.assertj.core.api.AbstractBooleanArrayAssert; 
 import org.assertj.core.api.AbstractBooleanAssert; 
@@ -62,15 +68,25 @@ import org.assertj.core.api.AbstractUriAssert;
 import org.assertj.core.api.AbstractUrlAssert; 
 import org.assertj.core.api.AbstractZonedDateTimeAssert; 
 import org.assertj.core.api.AssertDelegateTarget; 
+import org.assertj.core.api.AssertFactory; 
 import org.assertj.core.api.AssertProvider; 
 import org.assertj.core.api.Assertions; 
+import org.assertj.core.api.ClassBasedNavigableIterableAssert; 
+import org.assertj.core.api.ClassBasedNavigableListAssert; 
 import org.assertj.core.api.CompletableFutureAssert; 
 import org.assertj.core.api.Condition; 
+import org.assertj.core.api.DoublePredicateAssert; 
+import org.assertj.core.api.FactoryBasedNavigableIterableAssert; 
+import org.assertj.core.api.FactoryBasedNavigableListAssert; 
+import org.assertj.core.api.IntPredicateAssert; 
+import org.assertj.core.api.LongPredicateAssert; 
 import org.assertj.core.api.MapAssert; 
+import org.assertj.core.api.ObjectAssert; 
 import org.assertj.core.api.OptionalAssert; 
 import org.assertj.core.api.OptionalDoubleAssert; 
 import org.assertj.core.api.OptionalIntAssert; 
 import org.assertj.core.api.OptionalLongAssert; 
+import org.assertj.core.api.PredicateAssert; 
 import org.assertj.core.api.ThrowableAssert; 
 import org.assertj.core.api.ThrowableTypeAssert; 
 import org.assertj.core.api.filter.Filters; 
@@ -85,6 +101,7 @@ import org.assertj.core.data.Offset;
 import org.assertj.core.data.Percentage; 
 import org.assertj.core.groups.Properties; 
 import org.assertj.core.groups.Tuple; 
+import org.assertj.core.presentation.Representation; 
 
 /** 
  * Wrapper of static elements in org.assertj.core.api.Assertions
@@ -320,6 +337,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.DoublePredicateAssert org.assertj.core.api.Assertions.assertThat(java.util.function.DoublePredicate)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.DoublePredicate)}
+     */
+    default DoublePredicateAssert assertThat(DoublePredicate actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.AbstractFileAssert<?> org.assertj.core.api.Assertions.assertThat(java.io.File)
      * {@link org.assertj.core.api.Assertions#assertThat(java.io.File)}
      */
@@ -400,30 +427,40 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static <T> org.assertj.core.api.AbstractIterableAssert<?, ? extends java.lang.Iterable<? extends T>, T> org.assertj.core.api.Assertions.assertThat(java.lang.Iterable<? extends T>)
+     * Delegate call to public static org.assertj.core.api.IntPredicateAssert org.assertj.core.api.Assertions.assertThat(java.util.function.IntPredicate)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.IntPredicate)}
+     */
+    default IntPredicateAssert assertThat(IntPredicate actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.AbstractIterableAssert<?, java.lang.Iterable<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.lang.Iterable<? extends ELEMENT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Iterable)}
      */
-    default <T> AbstractIterableAssert<?, ? extends Iterable<? extends T>, T> assertThat(Iterable<? extends T> actual) {
+    default <ELEMENT> AbstractIterableAssert<?, Iterable<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(Iterable<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
 
 
     /**
-     * Delegate call to public static <T> org.assertj.core.api.AbstractIterableAssert<?, ? extends java.lang.Iterable<? extends T>, T> org.assertj.core.api.Assertions.assertThat(java.util.Iterator<? extends T>)
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.AbstractIterableAssert<?, java.lang.Iterable<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.util.Iterator<? extends ELEMENT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.Iterator)}
      */
-    default <T> AbstractIterableAssert<?, ? extends Iterable<? extends T>, T> assertThat(Iterator<? extends T> actual) {
+    default <ELEMENT> AbstractIterableAssert<?, Iterable<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(Iterator<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
 
 
     /**
-     * Delegate call to public static <T> org.assertj.core.api.AbstractListAssert<?, ? extends java.util.List<? extends T>, T> org.assertj.core.api.Assertions.assertThat(java.util.List<? extends T>)
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.AbstractListAssert<?, java.util.List<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.util.List<? extends ELEMENT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.List)}
      */
-    default <T> AbstractListAssert<?, ? extends List<? extends T>, T> assertThat(List<? extends T> actual) {
+    default <ELEMENT> AbstractListAssert<?, List<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(List<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -484,6 +521,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(long[])}
      */
     default AbstractLongArrayAssert<?> assertThat(long[] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.LongPredicateAssert org.assertj.core.api.Assertions.assertThat(java.util.function.LongPredicate)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.LongPredicate)}
+     */
+    default LongPredicateAssert assertThat(LongPredicate actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -570,6 +617,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static <T> org.assertj.core.api.PredicateAssert<T> org.assertj.core.api.Assertions.assertThat(java.util.function.Predicate<T>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.Predicate)}
+     */
+    default <T> PredicateAssert<T> assertThat(Predicate<T> actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.AbstractShortAssert<?> org.assertj.core.api.Assertions.assertThat(java.lang.Short)
      * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Short)}
      */
@@ -600,10 +657,10 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static <T> org.assertj.core.api.AbstractListAssert<?, ? extends java.util.List<? extends T>, T> org.assertj.core.api.Assertions.assertThat(java.util.stream.Stream<? extends T>)
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.AbstractListAssert<?, java.util.List<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.util.stream.Stream<? extends ELEMENT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.stream.Stream)}
      */
-    default <T> AbstractListAssert<?, ? extends List<? extends T>, T> assertThat(Stream<? extends T> actual) {
+    default <ELEMENT> AbstractListAssert<?, List<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(Stream<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -695,6 +752,46 @@ public interface AssertJ {
      */
     default AbstractZonedDateTimeAssert<?> assertThat(ZonedDateTime actual) {
         return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static <ACTUAL,ELEMENT,ELEMENT_ASSERT> org.assertj.core.api.ClassBasedNavigableIterableAssert<?, ACTUAL, ELEMENT, ELEMENT_ASSERT> org.assertj.core.api.Assertions.assertThat(ACTUAL,java.lang.Class<ELEMENT_ASSERT>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Iterable,java.lang.Class)}
+     */
+    default <ACTUAL extends Iterable<? extends ELEMENT>,ELEMENT,ELEMENT_ASSERT extends AbstractAssert<ELEMENT_ASSERT, ELEMENT>> ClassBasedNavigableIterableAssert<?, ACTUAL, ELEMENT, ELEMENT_ASSERT> assertThat(ACTUAL arg0, Class<ELEMENT_ASSERT> arg1) {
+        return Assertions.assertThat(arg0, arg1);
+    }
+
+
+
+    /**
+     * Delegate call to public static <ACTUAL,ELEMENT,ELEMENT_ASSERT> org.assertj.core.api.FactoryBasedNavigableIterableAssert<?, ACTUAL, ELEMENT, ELEMENT_ASSERT> org.assertj.core.api.Assertions.assertThat(java.lang.Iterable<? extends ELEMENT>,org.assertj.core.api.AssertFactory<ELEMENT, ELEMENT_ASSERT>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Iterable,org.assertj.core.api.AssertFactory)}
+     */
+    default <ACTUAL extends Iterable<? extends ELEMENT>,ELEMENT,ELEMENT_ASSERT extends AbstractAssert<ELEMENT_ASSERT, ELEMENT>> FactoryBasedNavigableIterableAssert<?, ACTUAL, ELEMENT, ELEMENT_ASSERT> assertThat(Iterable<? extends ELEMENT> arg0, AssertFactory<ELEMENT, ELEMENT_ASSERT> arg1) {
+        return Assertions.assertThat(arg0, arg1);
+    }
+
+
+
+    /**
+     * Delegate call to public static <ACTUAL,ELEMENT,ELEMENT_ASSERT> org.assertj.core.api.FactoryBasedNavigableListAssert<?, ACTUAL, ELEMENT, ELEMENT_ASSERT> org.assertj.core.api.Assertions.assertThat(java.util.List<? extends ELEMENT>,org.assertj.core.api.AssertFactory<ELEMENT, ELEMENT_ASSERT>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.List,org.assertj.core.api.AssertFactory)}
+     */
+    default <ACTUAL extends List<? extends ELEMENT>,ELEMENT,ELEMENT_ASSERT extends AbstractAssert<ELEMENT_ASSERT, ELEMENT>> FactoryBasedNavigableListAssert<?, ACTUAL, ELEMENT, ELEMENT_ASSERT> assertThat(List<? extends ELEMENT> arg0, AssertFactory<ELEMENT, ELEMENT_ASSERT> arg1) {
+        return Assertions.assertThat(arg0, arg1);
+    }
+
+
+
+    /**
+     * Delegate call to public static <ELEMENT,ACTUAL,ELEMENT_ASSERT> org.assertj.core.api.ClassBasedNavigableListAssert<?, ACTUAL, ELEMENT, ELEMENT_ASSERT> org.assertj.core.api.Assertions.assertThat(java.util.List<? extends ELEMENT>,java.lang.Class<ELEMENT_ASSERT>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.List,java.lang.Class)}
+     */
+    default <ELEMENT,ACTUAL extends List<? extends ELEMENT>,ELEMENT_ASSERT extends AbstractAssert<ELEMENT_ASSERT, ELEMENT>> ClassBasedNavigableListAssert<?, ACTUAL, ELEMENT, ELEMENT_ASSERT> assertThat(List<? extends ELEMENT> arg0, Class<ELEMENT_ASSERT> arg1) {
+        return Assertions.assertThat(arg0, arg1);
     }
 
 
@@ -1030,6 +1127,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.registerFormatterForType(java.lang.Class<?>,java.util.function.Function<java.lang.Object, java.lang.String>)
+     * {@link org.assertj.core.api.Assertions#registerFormatterForType(java.lang.Class,java.util.function.Function)}
+     */
+    default void registerFormatterForType(Class<?> type, Function<Object, String> formatter) {
+        Assertions.registerFormatterForType(type, formatter);
+    }
+
+
+
+    /**
      * Delegate call to public static void org.assertj.core.api.Assertions.setAllowComparingPrivateFields(boolean)
      * {@link org.assertj.core.api.Assertions#setAllowComparingPrivateFields(boolean)}
      */
@@ -1105,6 +1212,26 @@ public interface AssertJ {
      */
     default void useDefaultDateFormatsOnly() {
         Assertions.useDefaultDateFormatsOnly();
+    }
+
+
+
+    /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.useDefaultRepresentation()
+     * {@link org.assertj.core.api.Assertions#useDefaultRepresentation()}
+     */
+    default void useDefaultRepresentation() {
+        Assertions.useDefaultRepresentation();
+    }
+
+
+
+    /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.useRepresentation(org.assertj.core.presentation.Representation)
+     * {@link org.assertj.core.api.Assertions#useRepresentation(org.assertj.core.presentation.Representation)}
+     */
+    default void useRepresentation(Representation customRepresentation) {
+        Assertions.useRepresentation(customRepresentation);
     }
 
 
