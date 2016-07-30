@@ -4,6 +4,7 @@ import org.mockito.InOrder;
 import org.mockito.MockSettings; 
 import org.mockito.MockingDetails; 
 import org.mockito.Mockito; 
+import org.mockito.MockitoFramework; 
 import org.mockito.stubbing.Answer; 
 import org.mockito.stubbing.OngoingStubbing; 
 import org.mockito.stubbing.Stubber; 
@@ -188,6 +189,16 @@ public interface MockitoMixin extends MatchersMixin {
      */
     default Stubber doThrow(Class<? extends Throwable> toBeThrown, Class<? extends Throwable>... toBeThrownNext) {
         return Mockito.doThrow(toBeThrown, toBeThrownNext);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.mockito.MockitoFramework org.mockito.Mockito.framework()
+     * {@link org.mockito.Mockito#framework()}
+     */
+    default MockitoFramework framework() {
+        return Mockito.framework();
     }
 
 

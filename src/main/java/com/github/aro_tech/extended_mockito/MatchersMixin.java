@@ -34,8 +34,8 @@ public interface MatchersMixin {
      * Delegate call to public static <T> T org.mockito.ArgumentMatchers.any(java.lang.Class<T>)
      * {@link org.mockito.ArgumentMatchers#any(java.lang.Class)}
      */
-    default <T> T any(Class<T> clazz) {
-        return ArgumentMatchers.any(clazz);
+    default <T> T any(Class<T> type) {
+        return ArgumentMatchers.any(type);
     }
 
 
@@ -121,6 +121,26 @@ public interface MatchersMixin {
 
 
     /**
+     * Delegate call to public static java.util.Collection org.mockito.ArgumentMatchers.anyIterable()
+     * {@link org.mockito.ArgumentMatchers#anyIterable()}
+     */
+    default Collection<Object> anyIterable() {
+        return ArgumentMatchers.anyIterable();
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> java.lang.Iterable<T> org.mockito.ArgumentMatchers.anyIterableOf(java.lang.Class<T>)
+     * {@link org.mockito.ArgumentMatchers#anyIterableOf(java.lang.Class)}
+     */
+    default <T> Iterable<T> anyIterableOf(Class<T> clazz) {
+        return ArgumentMatchers.anyIterableOf(clazz);
+    }
+
+
+
+    /**
      * Delegate call to public static java.util.List org.mockito.ArgumentMatchers.anyList()
      * {@link org.mockito.ArgumentMatchers#anyList()}
      */
@@ -174,6 +194,7 @@ public interface MatchersMixin {
      * Delegate call to public static <T> T org.mockito.ArgumentMatchers.anyObject()
      * {@link org.mockito.ArgumentMatchers#anyObject()}
      */
+    @Deprecated
     default <T> T anyObject() {
         return ArgumentMatchers.anyObject();
     }
@@ -422,10 +443,10 @@ public interface MatchersMixin {
 
 
     /**
-     * Delegate call to public static java.lang.Object org.mockito.ArgumentMatchers.isNotNull()
+     * Delegate call to public static <T> T org.mockito.ArgumentMatchers.isNotNull()
      * {@link org.mockito.ArgumentMatchers#isNotNull()}
      */
-    default Object isNotNull() {
+    default <T> T isNotNull() {
         return ArgumentMatchers.isNotNull();
     }
 
@@ -442,10 +463,10 @@ public interface MatchersMixin {
 
 
     /**
-     * Delegate call to public static java.lang.Object org.mockito.ArgumentMatchers.isNull()
+     * Delegate call to public static <T> T org.mockito.ArgumentMatchers.isNull()
      * {@link org.mockito.ArgumentMatchers#isNull()}
      */
-    default Object isNull() {
+    default <T> T isNull() {
         return ArgumentMatchers.isNull();
     }
 
@@ -482,10 +503,10 @@ public interface MatchersMixin {
 
 
     /**
-     * Delegate call to public static java.lang.Object org.mockito.ArgumentMatchers.notNull()
+     * Delegate call to public static <T> T org.mockito.ArgumentMatchers.notNull()
      * {@link org.mockito.ArgumentMatchers#notNull()}
      */
-    default Object notNull() {
+    default <T> T notNull() {
         return ArgumentMatchers.notNull();
     }
 
