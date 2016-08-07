@@ -71,10 +71,10 @@ public interface MatchersMixin {
 
 
     /**
-     * Delegate call to public static java.util.Collection org.mockito.ArgumentMatchers.anyCollection()
+     * Delegate call to public static <T> java.util.Collection<T> org.mockito.ArgumentMatchers.anyCollection()
      * {@link org.mockito.ArgumentMatchers#anyCollection()}
      */
-    default Collection<Object> anyCollection() {
+    default <T> Collection<T> anyCollection() {
         return ArgumentMatchers.anyCollection();
     }
 
@@ -121,10 +121,10 @@ public interface MatchersMixin {
 
 
     /**
-     * Delegate call to public static java.util.Collection org.mockito.ArgumentMatchers.anyIterable()
+     * Delegate call to public static <T> java.lang.Iterable<T> org.mockito.ArgumentMatchers.anyIterable()
      * {@link org.mockito.ArgumentMatchers#anyIterable()}
      */
-    default Collection<Object> anyIterable() {
+    default <T> Iterable<T> anyIterable() {
         return ArgumentMatchers.anyIterable();
     }
 
@@ -141,10 +141,10 @@ public interface MatchersMixin {
 
 
     /**
-     * Delegate call to public static java.util.List org.mockito.ArgumentMatchers.anyList()
+     * Delegate call to public static <T> java.util.List<T> org.mockito.ArgumentMatchers.anyList()
      * {@link org.mockito.ArgumentMatchers#anyList()}
      */
-    default List<Object> anyList() {
+    default <T> List<T> anyList() {
         return ArgumentMatchers.anyList();
     }
 
@@ -171,10 +171,10 @@ public interface MatchersMixin {
 
 
     /**
-     * Delegate call to public static java.util.Map org.mockito.ArgumentMatchers.anyMap()
+     * Delegate call to public static <K,V> java.util.Map<K, V> org.mockito.ArgumentMatchers.anyMap()
      * {@link org.mockito.ArgumentMatchers#anyMap()}
      */
-    default Map<Object, Object> anyMap() {
+    default <K,V> Map<K, V> anyMap() {
         return ArgumentMatchers.anyMap();
     }
 
@@ -202,10 +202,10 @@ public interface MatchersMixin {
 
 
     /**
-     * Delegate call to public static java.util.Set org.mockito.ArgumentMatchers.anySet()
+     * Delegate call to public static <T> java.util.Set<T> org.mockito.ArgumentMatchers.anySet()
      * {@link org.mockito.ArgumentMatchers#anySet()}
      */
-    default Set<Object> anySet() {
+    default <T> Set<T> anySet() {
         return ArgumentMatchers.anySet();
     }
 
