@@ -49,7 +49,6 @@ import org.assertj.core.api.AbstractFloatAssert;
 import org.assertj.core.api.AbstractInputStreamAssert; 
 import org.assertj.core.api.AbstractIntArrayAssert; 
 import org.assertj.core.api.AbstractIntegerAssert; 
-import org.assertj.core.api.AbstractIterableAssert; 
 import org.assertj.core.api.AbstractListAssert; 
 import org.assertj.core.api.AbstractLocalDateAssert; 
 import org.assertj.core.api.AbstractLocalDateTimeAssert; 
@@ -79,6 +78,8 @@ import org.assertj.core.api.DoublePredicateAssert;
 import org.assertj.core.api.FactoryBasedNavigableIterableAssert; 
 import org.assertj.core.api.FactoryBasedNavigableListAssert; 
 import org.assertj.core.api.IntPredicateAssert; 
+import org.assertj.core.api.IterableAssert; 
+import org.assertj.core.api.ListAssert; 
 import org.assertj.core.api.LongPredicateAssert; 
 import org.assertj.core.api.MapAssert; 
 import org.assertj.core.api.ObjectAssert; 
@@ -437,30 +438,30 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static <ELEMENT> org.assertj.core.api.AbstractIterableAssert<?, java.lang.Iterable<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.lang.Iterable<? extends ELEMENT>)
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.IterableAssert<ELEMENT> org.assertj.core.api.Assertions.assertThat(java.lang.Iterable<? extends ELEMENT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Iterable)}
      */
-    default <ELEMENT> AbstractIterableAssert<?, Iterable<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(Iterable<? extends ELEMENT> actual) {
+    default <ELEMENT> IterableAssert<ELEMENT> assertThat(Iterable<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
 
 
     /**
-     * Delegate call to public static <ELEMENT> org.assertj.core.api.AbstractIterableAssert<?, java.lang.Iterable<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.util.Iterator<? extends ELEMENT>)
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.IterableAssert<ELEMENT> org.assertj.core.api.Assertions.assertThat(java.util.Iterator<? extends ELEMENT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.Iterator)}
      */
-    default <ELEMENT> AbstractIterableAssert<?, Iterable<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(Iterator<? extends ELEMENT> actual) {
+    default <ELEMENT> IterableAssert<ELEMENT> assertThat(Iterator<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
 
 
     /**
-     * Delegate call to public static <ELEMENT> org.assertj.core.api.AbstractListAssert<?, java.util.List<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.util.List<? extends ELEMENT>)
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.ListAssert<ELEMENT> org.assertj.core.api.Assertions.assertThat(java.util.List<? extends ELEMENT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.List)}
      */
-    default <ELEMENT> AbstractListAssert<?, List<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(List<? extends ELEMENT> actual) {
+    default <ELEMENT> ListAssert<ELEMENT> assertThat(List<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -827,6 +828,76 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.data.Offset<java.math.BigDecimal> org.assertj.core.api.Assertions.byLessThan(java.math.BigDecimal)
+     * {@link org.assertj.core.api.Assertions#byLessThan(java.math.BigDecimal)}
+     */
+    default Offset<BigDecimal> byLessThan(BigDecimal value) {
+        return Assertions.byLessThan(value);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.data.Offset<java.lang.Byte> org.assertj.core.api.Assertions.byLessThan(java.lang.Byte)
+     * {@link org.assertj.core.api.Assertions#byLessThan(java.lang.Byte)}
+     */
+    default Offset<Byte> byLessThan(Byte value) {
+        return Assertions.byLessThan(value);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.data.Offset<java.lang.Double> org.assertj.core.api.Assertions.byLessThan(java.lang.Double)
+     * {@link org.assertj.core.api.Assertions#byLessThan(java.lang.Double)}
+     */
+    default Offset<Double> byLessThan(Double value) {
+        return Assertions.byLessThan(value);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.data.Offset<java.lang.Float> org.assertj.core.api.Assertions.byLessThan(java.lang.Float)
+     * {@link org.assertj.core.api.Assertions#byLessThan(java.lang.Float)}
+     */
+    default Offset<Float> byLessThan(Float value) {
+        return Assertions.byLessThan(value);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.data.Offset<java.lang.Integer> org.assertj.core.api.Assertions.byLessThan(java.lang.Integer)
+     * {@link org.assertj.core.api.Assertions#byLessThan(java.lang.Integer)}
+     */
+    default Offset<Integer> byLessThan(Integer value) {
+        return Assertions.byLessThan(value);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.data.Offset<java.lang.Long> org.assertj.core.api.Assertions.byLessThan(java.lang.Long)
+     * {@link org.assertj.core.api.Assertions#byLessThan(java.lang.Long)}
+     */
+    default Offset<Long> byLessThan(Long value) {
+        return Assertions.byLessThan(value);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.data.Offset<java.lang.Short> org.assertj.core.api.Assertions.byLessThan(java.lang.Short)
+     * {@link org.assertj.core.api.Assertions#byLessThan(java.lang.Short)}
+     */
+    default Offset<Short> byLessThan(Short value) {
+        return Assertions.byLessThan(value);
+    }
+
+
+
+    /**
      * Delegate call to public static java.lang.Throwable org.assertj.core.api.Assertions.catchThrowable(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
      * {@link org.assertj.core.api.Assertions#catchThrowable(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
      */
@@ -942,6 +1013,16 @@ public interface AssertJ {
      */
     default void fail(String failureMessage) {
         Assertions.fail(failureMessage);
+    }
+
+
+
+    /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.fail(java.lang.String,java.lang.Object...)
+     * {@link org.assertj.core.api.Assertions#fail(java.lang.String,java.lang.Object[])}
+     */
+    default void fail(String failureMessage, Object... args) {
+        Assertions.fail(failureMessage, args);
     }
 
 
@@ -1127,10 +1208,10 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static void org.assertj.core.api.Assertions.registerFormatterForType(java.lang.Class<?>,java.util.function.Function<java.lang.Object, java.lang.String>)
+     * Delegate call to public static <T> void org.assertj.core.api.Assertions.registerFormatterForType(java.lang.Class<T>,java.util.function.Function<T, java.lang.String>)
      * {@link org.assertj.core.api.Assertions#registerFormatterForType(java.lang.Class,java.util.function.Function)}
      */
-    default void registerFormatterForType(Class<?> type, Function<Object, String> formatter) {
+    default <T> void registerFormatterForType(Class<T> type, Function<T, String> formatter) {
         Assertions.registerFormatterForType(type, formatter);
     }
 
@@ -1162,6 +1243,16 @@ public interface AssertJ {
      */
     default void setLenientDateParsing(boolean value) {
         Assertions.setLenientDateParsing(value);
+    }
+
+
+
+    /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.setMaxElementsForPrinting(int)
+     * {@link org.assertj.core.api.Assertions#setMaxElementsForPrinting(int)}
+     */
+    default void setMaxElementsForPrinting(int maxElementsForPrinting) {
+        Assertions.setMaxElementsForPrinting(maxElementsForPrinting);
     }
 
 

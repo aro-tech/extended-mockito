@@ -523,6 +523,16 @@ public interface MatchersMixin {
 
 
     /**
+     * Delegate call to public static <T> T org.mockito.ArgumentMatchers.nullable(java.lang.Class<T>)
+     * {@link org.mockito.ArgumentMatchers#nullable(java.lang.Class)}
+     */
+    default <T> T nullable(Class<T> clazz) {
+        return ArgumentMatchers.nullable(clazz);
+    }
+
+
+
+    /**
      * Delegate call to public static <T> T org.mockito.ArgumentMatchers.refEq(T,java.lang.String...)
      * {@link org.mockito.ArgumentMatchers#refEq(java.lang.Object,java.lang.String[])}
      */
