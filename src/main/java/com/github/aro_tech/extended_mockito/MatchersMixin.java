@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List; 
 import java.util.Map; 
 import java.util.Set; 
+import java.util.regex.Pattern; 
 import org.mockito.ArgumentMatcher; 
 import org.mockito.ArgumentMatchers; 
 
@@ -488,6 +489,16 @@ public interface MatchersMixin {
      */
     default long longThat(ArgumentMatcher<Long> matcher) {
         return ArgumentMatchers.longThat(matcher);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.lang.String org.mockito.ArgumentMatchers.matches(java.util.regex.Pattern)
+     * {@link org.mockito.ArgumentMatchers#matches(java.util.regex.Pattern)}
+     */
+    default String matches(Pattern pattern) {
+        return ArgumentMatchers.matches(pattern);
     }
 
 
