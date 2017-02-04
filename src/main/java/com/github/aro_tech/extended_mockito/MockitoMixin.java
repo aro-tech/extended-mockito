@@ -5,6 +5,7 @@ import org.mockito.MockSettings;
 import org.mockito.MockingDetails; 
 import org.mockito.Mockito; 
 import org.mockito.MockitoFramework; 
+import org.mockito.session.MockitoSessionBuilder; 
 import org.mockito.stubbing.Answer; 
 import org.mockito.stubbing.OngoingStubbing; 
 import org.mockito.stubbing.Stubber; 
@@ -269,6 +270,16 @@ public interface MockitoMixin extends MatchersMixin {
      */
     default MockingDetails mockingDetails(Object toInspect) {
         return Mockito.mockingDetails(toInspect);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.mockito.session.MockitoSessionBuilder org.mockito.Mockito.mockitoSession()
+     * {@link org.mockito.Mockito#mockitoSession()}
+     */
+    default MockitoSessionBuilder mockitoSession() {
+        return Mockito.mockitoSession();
     }
 
 
