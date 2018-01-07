@@ -27,6 +27,7 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt; 
 import java.util.OptionalLong; 
 import java.util.concurrent.CompletableFuture; 
+import java.util.concurrent.CompletionStage; 
 import java.util.concurrent.Future; 
 import java.util.concurrent.atomic.AtomicBoolean; 
 import java.util.concurrent.atomic.AtomicInteger; 
@@ -45,7 +46,10 @@ import java.util.function.Function;
 import java.util.function.IntPredicate; 
 import java.util.function.LongPredicate; 
 import java.util.function.Predicate; 
-import java.util.stream.BaseStream; 
+import java.util.stream.DoubleStream; 
+import java.util.stream.IntStream; 
+import java.util.stream.LongStream; 
+import java.util.stream.Stream; 
 import org.assertj.core.api.AbstractAssert; 
 import org.assertj.core.api.AbstractBigDecimalAssert; 
 import org.assertj.core.api.AbstractBigIntegerAssert; 
@@ -64,7 +68,6 @@ import org.assertj.core.api.AbstractDoubleAssert;
 import org.assertj.core.api.AbstractFileAssert; 
 import org.assertj.core.api.AbstractFloatArrayAssert; 
 import org.assertj.core.api.AbstractFloatAssert; 
-import org.assertj.core.api.AbstractFutureAssert; 
 import org.assertj.core.api.AbstractInputStreamAssert; 
 import org.assertj.core.api.AbstractInstantAssert; 
 import org.assertj.core.api.AbstractIntArrayAssert; 
@@ -109,6 +112,7 @@ import org.assertj.core.api.Condition;
 import org.assertj.core.api.DoublePredicateAssert; 
 import org.assertj.core.api.FactoryBasedNavigableIterableAssert; 
 import org.assertj.core.api.FactoryBasedNavigableListAssert; 
+import org.assertj.core.api.FutureAssert; 
 import org.assertj.core.api.IntPredicateAssert; 
 import org.assertj.core.api.IterableAssert; 
 import org.assertj.core.api.ListAssert; 
@@ -321,16 +325,6 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static <ELEMENT,STREAM> org.assertj.core.api.AbstractListAssert<?, java.util.List<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.util.stream.BaseStream<? extends ELEMENT, STREAM>)
-     * {@link org.assertj.core.api.Assertions#assertThat(java.util.stream.BaseStream)}
-     */
-    default <ELEMENT,STREAM extends BaseStream<ELEMENT, STREAM>> AbstractListAssert<?, List<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(BaseStream<? extends ELEMENT, STREAM> actual) {
-        return Assertions.assertThat(actual);
-    }
-
-
-
-    /**
      * Delegate call to public static org.assertj.core.api.AbstractBigDecimalAssert<?> org.assertj.core.api.Assertions.assertThat(java.math.BigDecimal)
      * {@link org.assertj.core.api.Assertions#assertThat(java.math.BigDecimal)}
      */
@@ -471,6 +465,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static <RESULT> org.assertj.core.api.CompletableFutureAssert<RESULT> org.assertj.core.api.Assertions.assertThat(java.util.concurrent.CompletionStage<RESULT>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.concurrent.CompletionStage)}
+     */
+    default <RESULT> CompletableFutureAssert<RESULT> assertThat(CompletionStage<RESULT> actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.AbstractDateAssert<?> org.assertj.core.api.Assertions.assertThat(java.util.Date)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.Date)}
      */
@@ -521,6 +525,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.AbstractListAssert<?, java.util.List<? extends java.lang.Double>, java.lang.Double, org.assertj.core.api.ObjectAssert<java.lang.Double>> org.assertj.core.api.Assertions.assertThat(java.util.stream.DoubleStream)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.stream.DoubleStream)}
+     */
+    default AbstractListAssert<?, List<? extends Double>, Double, ObjectAssert<Double>> assertThat(DoubleStream actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.AbstractFileAssert<?> org.assertj.core.api.Assertions.assertThat(java.io.File)
      * {@link org.assertj.core.api.Assertions#assertThat(java.io.File)}
      */
@@ -561,10 +575,10 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static <RESULT> org.assertj.core.api.AbstractFutureAssert<?, ? extends java.util.concurrent.Future<? extends RESULT>, RESULT> org.assertj.core.api.Assertions.assertThat(java.util.concurrent.Future<RESULT>)
+     * Delegate call to public static <RESULT> org.assertj.core.api.FutureAssert<RESULT> org.assertj.core.api.Assertions.assertThat(java.util.concurrent.Future<RESULT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.concurrent.Future)}
      */
-    default <RESULT> AbstractFutureAssert<?, ? extends Future<? extends RESULT>, RESULT> assertThat(Future<RESULT> actual) {
+    default <RESULT> FutureAssert<RESULT> assertThat(Future<RESULT> actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -625,6 +639,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.IntPredicate)}
      */
     default IntPredicateAssert assertThat(IntPredicate actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.AbstractListAssert<?, java.util.List<? extends java.lang.Integer>, java.lang.Integer, org.assertj.core.api.ObjectAssert<java.lang.Integer>> org.assertj.core.api.Assertions.assertThat(java.util.stream.IntStream)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.stream.IntStream)}
+     */
+    default AbstractListAssert<?, List<? extends Integer>, Integer, ObjectAssert<Integer>> assertThat(IntStream actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -725,6 +749,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.LongPredicate)}
      */
     default LongPredicateAssert assertThat(LongPredicate actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.AbstractListAssert<?, java.util.List<? extends java.lang.Long>, java.lang.Long, org.assertj.core.api.ObjectAssert<java.lang.Long>> org.assertj.core.api.Assertions.assertThat(java.util.stream.LongStream)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.stream.LongStream)}
+     */
+    default AbstractListAssert<?, List<? extends Long>, Long, ObjectAssert<Long>> assertThat(LongStream actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -845,6 +879,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(short[])}
      */
     default AbstractShortArrayAssert<?> assertThat(short[] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.AbstractListAssert<?, java.util.List<? extends ELEMENT>, ELEMENT, org.assertj.core.api.ObjectAssert<ELEMENT>> org.assertj.core.api.Assertions.assertThat(java.util.stream.Stream<? extends ELEMENT>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.stream.Stream)}
+     */
+    default <ELEMENT> AbstractListAssert<?, List<? extends ELEMENT>, ELEMENT, ObjectAssert<ELEMENT>> assertThat(Stream<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -1051,6 +1095,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.AbstractThrowableAssert<?, ? extends java.lang.Throwable> org.assertj.core.api.Assertions.assertThatThrownBy(org.assertj.core.api.ThrowableAssert$ThrowingCallable,java.lang.String,java.lang.Object...)
+     * {@link org.assertj.core.api.Assertions#assertThatThrownBy(org.assertj.core.api.ThrowableAssert$ThrowingCallable,java.lang.String,java.lang.Object[])}
+     */
+    default AbstractThrowableAssert<?, ? extends Throwable> assertThatThrownBy(ThrowableAssert.ThrowingCallable shouldRaiseThrowable, String description, Object... args) {
+        return Assertions.assertThatThrownBy(shouldRaiseThrowable, description, args);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.data.Index org.assertj.core.api.Assertions.atIndex(int)
      * {@link org.assertj.core.api.Assertions#atIndex(int)}
      */
@@ -1156,6 +1210,16 @@ public interface AssertJ {
      */
     default Throwable catchThrowable(ThrowableAssert.ThrowingCallable shouldRaiseThrowable) {
         return Assertions.catchThrowable(shouldRaiseThrowable);
+    }
+
+
+
+    /**
+     * Delegate call to public static <THROWABLE> THROWABLE org.assertj.core.api.Assertions.catchThrowableOfType(org.assertj.core.api.ThrowableAssert$ThrowingCallable,java.lang.Class<THROWABLE>)
+     * {@link org.assertj.core.api.Assertions#catchThrowableOfType(org.assertj.core.api.ThrowableAssert$ThrowingCallable,java.lang.Class)}
+     */
+    default <THROWABLE extends Throwable> THROWABLE catchThrowableOfType(ThrowableAssert.ThrowingCallable shouldRaiseThrowable, Class<THROWABLE> type) {
+        return Assertions.catchThrowableOfType(shouldRaiseThrowable, type);
     }
 
 
