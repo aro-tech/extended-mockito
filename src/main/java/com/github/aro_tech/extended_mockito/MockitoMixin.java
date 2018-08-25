@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoFramework; 
 import org.mockito.session.MockitoSessionBuilder; 
 import org.mockito.stubbing.Answer; 
+import org.mockito.stubbing.LenientStubber; 
 import org.mockito.stubbing.OngoingStubbing; 
 import org.mockito.stubbing.Stubber; 
 import org.mockito.verification.VerificationAfterDelay; 
@@ -220,6 +221,16 @@ public interface MockitoMixin extends MatchersMixin {
      */
     default InOrder inOrder(Object... mocks) {
         return Mockito.inOrder(mocks);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.mockito.stubbing.LenientStubber org.mockito.Mockito.lenient()
+     * {@link org.mockito.Mockito#lenient()}
+     */
+    default LenientStubber lenient() {
+        return Mockito.lenient();
     }
 
 

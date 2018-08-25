@@ -81,6 +81,7 @@ import org.assertj.core.api.AbstractOffsetTimeAssert;
 import org.assertj.core.api.AbstractPathAssert; 
 import org.assertj.core.api.AbstractShortArrayAssert; 
 import org.assertj.core.api.AbstractShortAssert; 
+import org.assertj.core.api.AbstractStringAssert; 
 import org.assertj.core.api.AbstractThrowableAssert; 
 import org.assertj.core.api.AbstractUriAssert; 
 import org.assertj.core.api.AbstractUrlAssert; 
@@ -893,10 +894,30 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static org.assertj.core.api.AbstractCharSequenceAssert<?, java.lang.String> org.assertj.core.api.Assertions.assertThat(java.lang.String)
+     * Delegate call to public static org.assertj.core.api.AbstractStringAssert<?> org.assertj.core.api.Assertions.assertThat(java.lang.String)
      * {@link org.assertj.core.api.Assertions#assertThat(java.lang.String)}
      */
-    default AbstractCharSequenceAssert<?, String> assertThat(String actual) {
+    default AbstractStringAssert<?> assertThat(String actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.AbstractCharSequenceAssert<?, ? extends java.lang.CharSequence> org.assertj.core.api.Assertions.assertThat(java.lang.StringBuffer)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.lang.StringBuffer)}
+     */
+    default AbstractCharSequenceAssert<?, ? extends CharSequence> assertThat(StringBuffer actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.AbstractCharSequenceAssert<?, ? extends java.lang.CharSequence> org.assertj.core.api.Assertions.assertThat(java.lang.StringBuilder)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.lang.StringBuilder)}
+     */
+    default AbstractCharSequenceAssert<?, ? extends CharSequence> assertThat(StringBuilder actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -1323,41 +1344,41 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static void org.assertj.core.api.Assertions.fail(java.lang.String)
+     * Delegate call to public static <T> T org.assertj.core.api.Assertions.fail(java.lang.String)
      * {@link org.assertj.core.api.Assertions#fail(java.lang.String)}
      */
-    default void fail(String failureMessage) {
-        Assertions.fail(failureMessage);
+    default <T> T fail(String failureMessage) {
+        return Assertions.fail(failureMessage);
     }
 
 
 
     /**
-     * Delegate call to public static void org.assertj.core.api.Assertions.fail(java.lang.String,java.lang.Object...)
+     * Delegate call to public static <T> T org.assertj.core.api.Assertions.fail(java.lang.String,java.lang.Object...)
      * {@link org.assertj.core.api.Assertions#fail(java.lang.String,java.lang.Object[])}
      */
-    default void fail(String failureMessage, Object... args) {
-        Assertions.fail(failureMessage, args);
+    default <T> T fail(String failureMessage, Object... args) {
+        return Assertions.fail(failureMessage, args);
     }
 
 
 
     /**
-     * Delegate call to public static void org.assertj.core.api.Assertions.fail(java.lang.String,java.lang.Throwable)
+     * Delegate call to public static <T> T org.assertj.core.api.Assertions.fail(java.lang.String,java.lang.Throwable)
      * {@link org.assertj.core.api.Assertions#fail(java.lang.String,java.lang.Throwable)}
      */
-    default void fail(String failureMessage, Throwable realCause) {
-        Assertions.fail(failureMessage, realCause);
+    default <T> T fail(String failureMessage, Throwable realCause) {
+        return Assertions.fail(failureMessage, realCause);
     }
 
 
 
     /**
-     * Delegate call to public static void org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown(java.lang.Class<? extends java.lang.Throwable>)
+     * Delegate call to public static <T> T org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown(java.lang.Class<? extends java.lang.Throwable>)
      * {@link org.assertj.core.api.Assertions#failBecauseExceptionWasNotThrown(java.lang.Class)}
      */
-    default void failBecauseExceptionWasNotThrown(Class<? extends Throwable> throwableClass) {
-        Assertions.failBecauseExceptionWasNotThrown(throwableClass);
+    default <T> T failBecauseExceptionWasNotThrown(Class<? extends Throwable> throwableClass) {
+        return Assertions.failBecauseExceptionWasNotThrown(throwableClass);
     }
 
 
@@ -1603,11 +1624,11 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static void org.assertj.core.api.Assertions.shouldHaveThrown(java.lang.Class<? extends java.lang.Throwable>)
+     * Delegate call to public static <T> T org.assertj.core.api.Assertions.shouldHaveThrown(java.lang.Class<? extends java.lang.Throwable>)
      * {@link org.assertj.core.api.Assertions#shouldHaveThrown(java.lang.Class)}
      */
-    default void shouldHaveThrown(Class<? extends Throwable> throwableClass) {
-        Assertions.shouldHaveThrown(throwableClass);
+    default <T> T shouldHaveThrown(Class<? extends Throwable> throwableClass) {
+        return Assertions.shouldHaveThrown(throwableClass);
     }
 
 
