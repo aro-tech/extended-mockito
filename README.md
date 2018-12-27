@@ -89,7 +89,10 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
  * floatMatches
  * byteMatches
  * charMatches 
-  
+
+** Coming soon : Injection methods
+ * injectByName - Simple dependency injection which works for a private field with no setter
+ * injectByType - Injection of multiple objects based on their type and the alphabetical order of field names
 
 ##Blog
 [![The Green Bar](https://img.shields.io/badge/My_Blog:-The_Green_Bar-brightgreen.svg)](https://thegreenbar.wordpress.com/)
