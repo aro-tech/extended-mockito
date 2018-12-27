@@ -11,7 +11,7 @@ import org.mockito.ArgumentCaptor;
  * @author aro_tech
  *
  */
-public interface ExtendedMockito extends MockitoMixin, ExtendedMatchers {
+public interface ExtendedMockito extends MockitoMixin, ExtendedMatchers, Injector {
 
 	/**
 	 * Convenience method for creating an ArgumentCaptor for the given type
