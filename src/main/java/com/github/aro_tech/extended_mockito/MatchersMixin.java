@@ -85,6 +85,7 @@ public interface MatchersMixin {
      * Delegate call to public static <T> java.util.Collection<T> org.mockito.ArgumentMatchers.anyCollectionOf(java.lang.Class<T>)
      * {@link org.mockito.ArgumentMatchers#anyCollectionOf(java.lang.Class)}
      */
+    @Deprecated
     default <T> Collection<T> anyCollectionOf(Class<T> clazz) {
         return ArgumentMatchers.anyCollectionOf(clazz);
     }
@@ -135,6 +136,7 @@ public interface MatchersMixin {
      * Delegate call to public static <T> java.lang.Iterable<T> org.mockito.ArgumentMatchers.anyIterableOf(java.lang.Class<T>)
      * {@link org.mockito.ArgumentMatchers#anyIterableOf(java.lang.Class)}
      */
+    @Deprecated
     default <T> Iterable<T> anyIterableOf(Class<T> clazz) {
         return ArgumentMatchers.anyIterableOf(clazz);
     }
@@ -155,6 +157,7 @@ public interface MatchersMixin {
      * Delegate call to public static <T> java.util.List<T> org.mockito.ArgumentMatchers.anyListOf(java.lang.Class<T>)
      * {@link org.mockito.ArgumentMatchers#anyListOf(java.lang.Class)}
      */
+    @Deprecated
     default <T> List<T> anyListOf(Class<T> clazz) {
         return ArgumentMatchers.anyListOf(clazz);
     }
@@ -185,6 +188,7 @@ public interface MatchersMixin {
      * Delegate call to public static <K,V> java.util.Map<K, V> org.mockito.ArgumentMatchers.anyMapOf(java.lang.Class<K>,java.lang.Class<V>)
      * {@link org.mockito.ArgumentMatchers#anyMapOf(java.lang.Class,java.lang.Class)}
      */
+    @Deprecated
     default <K,V> Map<K, V> anyMapOf(Class<K> keyClazz, Class<V> valueClazz) {
         return ArgumentMatchers.anyMapOf(keyClazz, valueClazz);
     }
@@ -216,6 +220,7 @@ public interface MatchersMixin {
      * Delegate call to public static <T> java.util.Set<T> org.mockito.ArgumentMatchers.anySetOf(java.lang.Class<T>)
      * {@link org.mockito.ArgumentMatchers#anySetOf(java.lang.Class)}
      */
+    @Deprecated
     default <T> Set<T> anySetOf(Class<T> clazz) {
         return ArgumentMatchers.anySetOf(clazz);
     }
@@ -457,6 +462,7 @@ public interface MatchersMixin {
      * Delegate call to public static <T> T org.mockito.ArgumentMatchers.isNotNull(java.lang.Class<T>)
      * {@link org.mockito.ArgumentMatchers#isNotNull(java.lang.Class)}
      */
+    @Deprecated
     default <T> T isNotNull(Class<T> clazz) {
         return ArgumentMatchers.isNotNull(clazz);
     }
@@ -477,6 +483,7 @@ public interface MatchersMixin {
      * Delegate call to public static <T> T org.mockito.ArgumentMatchers.isNull(java.lang.Class<T>)
      * {@link org.mockito.ArgumentMatchers#isNull(java.lang.Class)}
      */
+    @Deprecated
     default <T> T isNull(Class<T> clazz) {
         return ArgumentMatchers.isNull(clazz);
     }
@@ -527,6 +534,7 @@ public interface MatchersMixin {
      * Delegate call to public static <T> T org.mockito.ArgumentMatchers.notNull(java.lang.Class<T>)
      * {@link org.mockito.ArgumentMatchers#notNull(java.lang.Class)}
      */
+    @Deprecated
     default <T> T notNull(Class<T> clazz) {
         return ArgumentMatchers.notNull(clazz);
     }

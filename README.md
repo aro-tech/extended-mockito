@@ -6,13 +6,13 @@ Requires Java 8 (or higher)
 Adds a mixin interface (built by [interface-it] (https://github.com/aro-tech/interface-it)) called ExtendedMockito (and there is also ExtendedBDDMockito) and extra matchers, including lambda-capable matchers.
 
 ##Latest release
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|2.23.4.1|jar)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|2.24.0.1|jar)
 
-[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v2.23.4.1) 
+[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v2.24.0.1) 
 
-[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/2.23.4.1)
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/2.24.0.1)
 
-[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/2.23.4.1/ "binaries")
+[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/2.24.0.1/ "binaries")
 
 
 In Maven:
@@ -21,7 +21,7 @@ In Maven:
 <dependency>
   <groupId>com.github.aro-tech</groupId>
   <artifactId>extended-mockito</artifactId>
-  <version>2.23.4.1</version>
+  <version>2.24.0.1</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -90,7 +90,7 @@ See [the unit tests] (https://github.com/aro-tech/extended-mockito/blob/master/s
  * byteMatches
  * charMatches 
 
-**Coming soon : Injection methods**
+**New : Injection methods**
  * injectByName - Simple dependency injection which works for a private field with no setter
  * injectByType - Injection of multiple objects based on their type and the alphabetical order of field names
 
