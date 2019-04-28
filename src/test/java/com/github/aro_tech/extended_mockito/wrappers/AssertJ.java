@@ -113,6 +113,7 @@ import org.assertj.core.api.FactoryBasedNavigableListAssert;
 import org.assertj.core.api.FutureAssert; 
 import org.assertj.core.api.IntPredicateAssert; 
 import org.assertj.core.api.IterableAssert; 
+import org.assertj.core.api.IteratorAssert; 
 import org.assertj.core.api.ListAssert; 
 import org.assertj.core.api.LongPredicateAssert; 
 import org.assertj.core.api.MapAssert; 
@@ -664,10 +665,10 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static <ELEMENT> org.assertj.core.api.IterableAssert<ELEMENT> org.assertj.core.api.Assertions.assertThat(java.util.Iterator<? extends ELEMENT>)
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.IteratorAssert<ELEMENT> org.assertj.core.api.Assertions.assertThat(java.util.Iterator<? extends ELEMENT>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.Iterator)}
      */
-    default <ELEMENT> IterableAssert<ELEMENT> assertThat(Iterator<? extends ELEMENT> actual) {
+    default <ELEMENT> IteratorAssert<ELEMENT> assertThat(Iterator<? extends ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -1099,6 +1100,16 @@ public interface AssertJ {
      */
     default ThrowableTypeAssert<NullPointerException> assertThatNullPointerException() {
         return Assertions.assertThatNullPointerException();
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.assertj.core.api.ObjectAssert<T> org.assertj.core.api.Assertions.assertThatObject(T)
+     * {@link org.assertj.core.api.Assertions#assertThatObject(java.lang.Object)}
+     */
+    default <T> ObjectAssert<T> assertThatObject(T actual) {
+        return Assertions.assertThatObject(actual);
     }
 
 
@@ -1579,6 +1590,16 @@ public interface AssertJ {
      */
     default void setAllowExtractingPrivateFields(boolean allowExtractingPrivateFields) {
         Assertions.setAllowExtractingPrivateFields(allowExtractingPrivateFields);
+    }
+
+
+
+    /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.setExtractBareNamePropertyMethods(boolean)
+     * {@link org.assertj.core.api.Assertions#setExtractBareNamePropertyMethods(boolean)}
+     */
+    default void setExtractBareNamePropertyMethods(boolean barenamePropertyMethods) {
+        Assertions.setExtractBareNamePropertyMethods(barenamePropertyMethods);
     }
 
 
