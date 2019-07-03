@@ -86,6 +86,16 @@ public interface MockitoMixin extends MatchersMixin {
 
 
     /**
+     * Delegate call to public static org.mockito.verification.VerificationMode org.mockito.Mockito.atMostOnce()
+     * {@link org.mockito.Mockito#atMostOnce()}
+     */
+    default VerificationMode atMostOnce() {
+        return Mockito.atMostOnce();
+    }
+
+
+
+    /**
      * Delegate call to public static org.mockito.verification.VerificationMode org.mockito.Mockito.calls(int)
      * {@link org.mockito.Mockito#calls(int)}
      */
