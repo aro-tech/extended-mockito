@@ -406,6 +406,16 @@ public interface MockitoMixin extends MatchersMixin {
 
 
     /**
+     * Delegate call to public static void org.mockito.Mockito.verifyNoInteractions(java.lang.Object...)
+     * {@link org.mockito.Mockito#verifyNoInteractions(java.lang.Object[])}
+     */
+    default void verifyNoInteractions(Object... mocks) {
+        Mockito.verifyNoInteractions(mocks);
+    }
+
+
+
+    /**
      * Delegate call to public static void org.mockito.Mockito.verifyNoMoreInteractions(java.lang.Object...)
      * {@link org.mockito.Mockito#verifyNoMoreInteractions(java.lang.Object[])}
      */
@@ -419,6 +429,7 @@ public interface MockitoMixin extends MatchersMixin {
      * Delegate call to public static void org.mockito.Mockito.verifyZeroInteractions(java.lang.Object...)
      * {@link org.mockito.Mockito#verifyZeroInteractions(java.lang.Object[])}
      */
+    @Deprecated
     default void verifyZeroInteractions(Object... mocks) {
         Mockito.verifyZeroInteractions(mocks);
     }

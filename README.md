@@ -6,13 +6,13 @@ Requires Java 8 (or higher)
 Adds a mixin interface (built by [interface-it] (https://github.com/aro-tech/interface-it)) called ExtendedMockito (and there is also ExtendedBDDMockito) and extra matchers, including lambda-capable matchers.
 
 ##Latest release
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|3.0.0.1|jar)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.aro-tech/extended-mockito/badge.svg)](http://search.maven.org/#artifactdetails|com.github.aro-tech|extended-mockito|3.2.4.1|jar)
 
-[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v3.0.0.1) 
+[Release notes on github] (https://github.com/aro-tech/extended-mockito/releases/tag/v3.2.4.1) 
 
-[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/3.0.0.1)
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.github.aro-tech/extended-mockito/badge.svg)](http://www.javadoc.io/doc/com.github.aro-tech/extended-mockito/3.2.4.1)
 
-[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/3.0.0.1/ "binaries")
+[Binary downloads] (https://oss.sonatype.org/content/groups/public/com/github/aro-tech/extended-mockito/3.2.4.1/ "binaries")
 
 
 In Maven:
@@ -21,7 +21,7 @@ In Maven:
 <dependency>
   <groupId>com.github.aro-tech</groupId>
   <artifactId>extended-mockito</artifactId>
-  <version>3.0.0.1</version>
+  <version>3.2.4.1</version>
   <scope>test</scope>
 </dependency>
 ```
