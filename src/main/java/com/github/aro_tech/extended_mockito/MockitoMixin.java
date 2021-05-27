@@ -1,21 +1,21 @@
 package com.github.aro_tech.extended_mockito;
 
-import java.util.function.Function; 
-import org.mockito.InOrder; 
-import org.mockito.MockSettings; 
-import org.mockito.MockedConstruction; 
-import org.mockito.MockedConstruction.org.mockito.MockedConstruction; 
-import org.mockito.MockedStatic; 
-import org.mockito.MockingDetails; 
-import org.mockito.Mockito; 
-import org.mockito.MockitoFramework; 
-import org.mockito.session.MockitoSessionBuilder; 
-import org.mockito.stubbing.Answer; 
-import org.mockito.stubbing.LenientStubber; 
-import org.mockito.stubbing.OngoingStubbing; 
-import org.mockito.stubbing.Stubber; 
-import org.mockito.verification.VerificationAfterDelay; 
-import org.mockito.verification.VerificationMode; 
+import java.util.function.Function;
+
+import org.mockito.InOrder;
+import org.mockito.MockSettings;
+import org.mockito.MockedConstruction;
+import org.mockito.MockedStatic;
+import org.mockito.MockingDetails;
+import org.mockito.Mockito;
+import org.mockito.MockitoFramework;
+import org.mockito.session.MockitoSessionBuilder;
+import org.mockito.stubbing.Answer;
+import org.mockito.stubbing.LenientStubber;
+import org.mockito.stubbing.OngoingStubbing;
+import org.mockito.stubbing.Stubber;
+import org.mockito.verification.VerificationAfterDelay;
+import org.mockito.verification.VerificationMode;
 import org.mockito.verification.VerificationWithTimeout; 
 
 /** 

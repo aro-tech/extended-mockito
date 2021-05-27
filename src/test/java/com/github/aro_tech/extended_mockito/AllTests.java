@@ -11,7 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ExtendedBDDMockitoTest.class, ExtendedMatchersTest.class, ExtendedMockitoTest.class, InjectorTest.class })
+@SuiteClasses({ ExtendedBDDMockitoTest.class, ExtendedMatchersTest.class, ExtendedMockitoTest.class })
 public class AllTests {
 
 }
