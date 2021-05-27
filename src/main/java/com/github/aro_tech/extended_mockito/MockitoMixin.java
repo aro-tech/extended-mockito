@@ -1,7 +1,11 @@
 package com.github.aro_tech.extended_mockito;
 
+import java.util.function.Function; 
 import org.mockito.InOrder; 
 import org.mockito.MockSettings; 
+import org.mockito.MockedConstruction; 
+import org.mockito.MockedConstruction.org.mockito.MockedConstruction; 
+import org.mockito.MockedStatic; 
 import org.mockito.MockingDetails; 
 import org.mockito.Mockito; 
 import org.mockito.MockitoFramework; 
@@ -101,6 +105,16 @@ public interface MockitoMixin extends MatchersMixin {
      */
     default VerificationMode calls(int wantedNumberOfInvocations) {
         return Mockito.calls(wantedNumberOfInvocations);
+    }
+
+
+
+    /**
+     * Delegate call to public static void org.mockito.Mockito.clearAllCaches()
+     * {@link org.mockito.Mockito#clearAllCaches()}
+     */
+    default void clearAllCaches() {
+        Mockito.clearAllCaches();
     }
 
 
@@ -281,6 +295,116 @@ public interface MockitoMixin extends MatchersMixin {
      */
     default <T> T mock(Class<T> classToMock, String name) {
         return Mockito.mock(classToMock, name);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedConstruction<T> org.mockito.Mockito.mockConstruction(java.lang.Class<T>)
+     * {@link org.mockito.Mockito#mockConstruction(java.lang.Class)}
+     */
+    default <T> MockedConstruction<T> mockConstruction(Class<T> classToMock) {
+        return Mockito.mockConstruction(classToMock);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedConstruction<T> org.mockito.Mockito.mockConstruction(java.lang.Class<T>,java.util.function.Function<org.mockito.MockedConstruction$Context, org.mockito.MockSettings>)
+     * {@link org.mockito.Mockito#mockConstruction(java.lang.Class,java.util.function.Function)}
+     */
+    default <T> MockedConstruction<T> mockConstruction(Class<T> classToMock, Function<MockedConstruction.Context, MockSettings> arg1) {
+        return Mockito.mockConstruction(classToMock, arg1);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedConstruction<T> org.mockito.Mockito.mockConstruction(java.lang.Class<T>,org.mockito.MockedConstruction.org.mockito.MockedConstruction$MockInitializer<T>)
+     * {@link org.mockito.Mockito#mockConstruction(java.lang.Class,org.mockito.MockedConstruction$MockInitializer)}
+     */
+    default <T> MockedConstruction<T> mockConstruction(Class<T> classToMock, MockedConstruction.MockInitializer<T> mockInitializer) {
+        return Mockito.mockConstruction(classToMock, mockInitializer);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedConstruction<T> org.mockito.Mockito.mockConstruction(java.lang.Class<T>,org.mockito.MockSettings)
+     * {@link org.mockito.Mockito#mockConstruction(java.lang.Class,org.mockito.MockSettings)}
+     */
+    default <T> MockedConstruction<T> mockConstruction(Class<T> classToMock, MockSettings mockSettings) {
+        return Mockito.mockConstruction(classToMock, mockSettings);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedConstruction<T> org.mockito.Mockito.mockConstruction(java.lang.Class<T>,java.util.function.Function<org.mockito.MockedConstruction$Context, org.mockito.MockSettings>,org.mockito.MockedConstruction.org.mockito.MockedConstruction$MockInitializer<T>)
+     * {@link org.mockito.Mockito#mockConstruction(java.lang.Class,java.util.function.Function,org.mockito.MockedConstruction$MockInitializer)}
+     */
+    default <T> MockedConstruction<T> mockConstruction(Class<T> classToMock, Function<MockedConstruction.Context, MockSettings> arg1, MockedConstruction.MockInitializer<T> mockInitializer) {
+        return Mockito.mockConstruction(classToMock, arg1, mockInitializer);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedConstruction<T> org.mockito.Mockito.mockConstruction(java.lang.Class<T>,org.mockito.MockSettings,org.mockito.MockedConstruction.org.mockito.MockedConstruction$MockInitializer<T>)
+     * {@link org.mockito.Mockito#mockConstruction(java.lang.Class,org.mockito.MockSettings,org.mockito.MockedConstruction$MockInitializer)}
+     */
+    default <T> MockedConstruction<T> mockConstruction(Class<T> classToMock, MockSettings mockSettings, MockedConstruction.MockInitializer<T> mockInitializer) {
+        return Mockito.mockConstruction(classToMock, mockSettings, mockInitializer);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedConstruction<T> org.mockito.Mockito.mockConstructionWithAnswer(java.lang.Class<T>,org.mockito.stubbing.Answer,org.mockito.stubbing.Answer...)
+     * {@link org.mockito.Mockito#mockConstructionWithAnswer(java.lang.Class,org.mockito.stubbing.Answer,org.mockito.stubbing.Answer[])}
+     */
+    default <T> MockedConstruction<T> mockConstructionWithAnswer(Class<T> classToMock, Answer defaultAnswer, Answer... additionalAnswers) {
+        return Mockito.mockConstructionWithAnswer(classToMock, defaultAnswer, additionalAnswers);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedStatic<T> org.mockito.Mockito.mockStatic(java.lang.Class<T>)
+     * {@link org.mockito.Mockito#mockStatic(java.lang.Class)}
+     */
+    default <T> MockedStatic<T> mockStatic(Class<T> classToMock) {
+        return Mockito.mockStatic(classToMock);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedStatic<T> org.mockito.Mockito.mockStatic(java.lang.Class<T>,org.mockito.stubbing.Answer)
+     * {@link org.mockito.Mockito#mockStatic(java.lang.Class,org.mockito.stubbing.Answer)}
+     */
+    default <T> MockedStatic<T> mockStatic(Class<T> classToMock, Answer defaultAnswer) {
+        return Mockito.mockStatic(classToMock, defaultAnswer);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedStatic<T> org.mockito.Mockito.mockStatic(java.lang.Class<T>,org.mockito.MockSettings)
+     * {@link org.mockito.Mockito#mockStatic(java.lang.Class,org.mockito.MockSettings)}
+     */
+    default <T> MockedStatic<T> mockStatic(Class<T> classToMock, MockSettings mockSettings) {
+        return Mockito.mockStatic(classToMock, mockSettings);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.mockito.MockedStatic<T> org.mockito.Mockito.mockStatic(java.lang.Class<T>,java.lang.String)
+     * {@link org.mockito.Mockito#mockStatic(java.lang.Class,java.lang.String)}
+     */
+    default <T> MockedStatic<T> mockStatic(Class<T> classToMock, String name) {
+        return Mockito.mockStatic(classToMock, name);
     }
 
 
