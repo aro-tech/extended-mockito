@@ -1,144 +1,168 @@
 package com.github.aro_tech.extended_mockito.wrappers;
 
-import java.io.File; 
-import java.io.IOException; 
-import java.io.InputStream; 
-import java.math.BigDecimal; 
-import java.math.BigInteger; 
-import java.net.URI; 
-import java.net.URL; 
-import java.nio.charset.Charset; 
-import java.nio.file.Path; 
-import java.text.DateFormat; 
-import java.time.Instant; 
-import java.time.LocalDate; 
-import java.time.LocalDateTime; 
-import java.time.LocalTime; 
-import java.time.OffsetDateTime; 
-import java.time.OffsetTime; 
-import java.time.ZonedDateTime; 
-import java.time.temporal.TemporalUnit; 
-import java.util.Date; 
-import java.util.Iterator; 
-import java.util.List; 
-import java.util.Map; 
-import java.util.Optional; 
-import java.util.OptionalDouble; 
-import java.util.OptionalInt; 
-import java.util.OptionalLong; 
-import java.util.concurrent.CompletableFuture; 
-import java.util.concurrent.CompletionStage; 
-import java.util.concurrent.Future; 
-import java.util.concurrent.atomic.AtomicBoolean; 
-import java.util.concurrent.atomic.AtomicInteger; 
-import java.util.concurrent.atomic.AtomicIntegerArray; 
-import java.util.concurrent.atomic.AtomicIntegerFieldUpdater; 
-import java.util.concurrent.atomic.AtomicLong; 
-import java.util.concurrent.atomic.AtomicLongArray; 
-import java.util.concurrent.atomic.AtomicLongFieldUpdater; 
-import java.util.concurrent.atomic.AtomicMarkableReference; 
-import java.util.concurrent.atomic.AtomicReference; 
-import java.util.concurrent.atomic.AtomicReferenceArray; 
-import java.util.concurrent.atomic.AtomicReferenceFieldUpdater; 
-import java.util.concurrent.atomic.AtomicStampedReference; 
-import java.util.function.DoublePredicate; 
-import java.util.function.Function; 
-import java.util.function.IntPredicate; 
-import java.util.function.LongPredicate; 
-import java.util.function.Predicate; 
-import java.util.stream.DoubleStream; 
-import java.util.stream.IntStream; 
-import java.util.stream.LongStream; 
-import java.util.stream.Stream; 
-import org.assertj.core.api.AbstractAssert; 
-import org.assertj.core.api.AbstractBigDecimalAssert; 
-import org.assertj.core.api.AbstractBigIntegerAssert; 
-import org.assertj.core.api.AbstractBooleanArrayAssert; 
-import org.assertj.core.api.AbstractBooleanAssert; 
-import org.assertj.core.api.AbstractByteArrayAssert; 
-import org.assertj.core.api.AbstractByteAssert; 
-import org.assertj.core.api.AbstractCharArrayAssert; 
-import org.assertj.core.api.AbstractCharSequenceAssert; 
-import org.assertj.core.api.AbstractCharacterAssert; 
-import org.assertj.core.api.AbstractComparableAssert; 
-import org.assertj.core.api.AbstractDateAssert; 
-import org.assertj.core.api.AbstractDoubleArrayAssert; 
-import org.assertj.core.api.AbstractDoubleAssert; 
-import org.assertj.core.api.AbstractFileAssert; 
-import org.assertj.core.api.AbstractFloatArrayAssert; 
-import org.assertj.core.api.AbstractFloatAssert; 
-import org.assertj.core.api.AbstractInputStreamAssert; 
-import org.assertj.core.api.AbstractInstantAssert; 
-import org.assertj.core.api.AbstractIntArrayAssert; 
-import org.assertj.core.api.AbstractIntegerAssert; 
-import org.assertj.core.api.AbstractLocalDateAssert; 
-import org.assertj.core.api.AbstractLocalDateTimeAssert; 
-import org.assertj.core.api.AbstractLocalTimeAssert; 
-import org.assertj.core.api.AbstractLongArrayAssert; 
-import org.assertj.core.api.AbstractLongAssert; 
-import org.assertj.core.api.AbstractOffsetDateTimeAssert; 
-import org.assertj.core.api.AbstractOffsetTimeAssert; 
-import org.assertj.core.api.AbstractPathAssert; 
-import org.assertj.core.api.AbstractShortArrayAssert; 
-import org.assertj.core.api.AbstractShortAssert; 
-import org.assertj.core.api.AbstractStringAssert; 
-import org.assertj.core.api.AbstractThrowableAssert; 
-import org.assertj.core.api.AbstractUriAssert; 
-import org.assertj.core.api.AbstractUrlAssert; 
-import org.assertj.core.api.AbstractZonedDateTimeAssert; 
-import org.assertj.core.api.AssertDelegateTarget; 
-import org.assertj.core.api.AssertFactory; 
-import org.assertj.core.api.AssertProvider; 
-import org.assertj.core.api.Assertions; 
-import org.assertj.core.api.AtomicBooleanAssert; 
-import org.assertj.core.api.AtomicIntegerArrayAssert; 
-import org.assertj.core.api.AtomicIntegerAssert; 
-import org.assertj.core.api.AtomicIntegerFieldUpdaterAssert; 
-import org.assertj.core.api.AtomicLongArrayAssert; 
-import org.assertj.core.api.AtomicLongAssert; 
-import org.assertj.core.api.AtomicLongFieldUpdaterAssert; 
-import org.assertj.core.api.AtomicMarkableReferenceAssert; 
-import org.assertj.core.api.AtomicReferenceArrayAssert; 
-import org.assertj.core.api.AtomicReferenceAssert; 
-import org.assertj.core.api.AtomicReferenceFieldUpdaterAssert; 
-import org.assertj.core.api.AtomicStampedReferenceAssert; 
-import org.assertj.core.api.ClassAssert; 
-import org.assertj.core.api.ClassBasedNavigableIterableAssert; 
-import org.assertj.core.api.ClassBasedNavigableListAssert; 
-import org.assertj.core.api.CompletableFutureAssert; 
-import org.assertj.core.api.Condition; 
-import org.assertj.core.api.DoublePredicateAssert; 
-import org.assertj.core.api.FactoryBasedNavigableIterableAssert; 
-import org.assertj.core.api.FactoryBasedNavigableListAssert; 
-import org.assertj.core.api.FutureAssert; 
-import org.assertj.core.api.IntPredicateAssert; 
-import org.assertj.core.api.IterableAssert; 
-import org.assertj.core.api.IteratorAssert; 
-import org.assertj.core.api.ListAssert; 
-import org.assertj.core.api.LongPredicateAssert; 
-import org.assertj.core.api.MapAssert; 
-import org.assertj.core.api.ObjectArrayAssert; 
-import org.assertj.core.api.ObjectAssert; 
-import org.assertj.core.api.OptionalAssert; 
-import org.assertj.core.api.OptionalDoubleAssert; 
-import org.assertj.core.api.OptionalIntAssert; 
-import org.assertj.core.api.OptionalLongAssert; 
-import org.assertj.core.api.PredicateAssert; 
-import org.assertj.core.api.ThrowableAssert; 
-import org.assertj.core.api.ThrowableTypeAssert; 
-import org.assertj.core.api.filter.Filters; 
-import org.assertj.core.api.filter.InFilter; 
-import org.assertj.core.api.filter.NotFilter; 
-import org.assertj.core.api.filter.NotInFilter; 
-import org.assertj.core.condition.DoesNotHave; 
-import org.assertj.core.condition.Not; 
-import org.assertj.core.data.Index; 
-import org.assertj.core.data.MapEntry; 
-import org.assertj.core.data.Offset; 
-import org.assertj.core.data.Percentage; 
-import org.assertj.core.data.TemporalUnitOffset; 
-import org.assertj.core.groups.Properties; 
-import org.assertj.core.groups.Tuple; 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.net.URI;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.text.DateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
+import java.time.Period;
+import java.time.ZonedDateTime;
+import java.time.temporal.TemporalUnit;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+import java.util.OptionalLong;
+import java.util.Spliterator;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicIntegerArray;
+import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicLongArray;
+import java.util.concurrent.atomic.AtomicLongFieldUpdater;
+import java.util.concurrent.atomic.AtomicMarkableReference;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicReferenceArray;
+import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
+import java.util.concurrent.atomic.AtomicStampedReference;
+import java.util.concurrent.atomic.LongAdder;
+import java.util.function.Consumer;
+import java.util.function.DoublePredicate;
+import java.util.function.Function;
+import java.util.function.IntPredicate;
+import java.util.function.LongPredicate;
+import java.util.function.Predicate;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
+
+import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.AbstractBigDecimalAssert;
+import org.assertj.core.api.AbstractBigIntegerAssert;
+import org.assertj.core.api.AbstractBooleanArrayAssert;
+import org.assertj.core.api.AbstractBooleanAssert;
+import org.assertj.core.api.AbstractByteArrayAssert;
+import org.assertj.core.api.AbstractByteAssert;
+import org.assertj.core.api.AbstractCharArrayAssert;
+import org.assertj.core.api.AbstractCharSequenceAssert;
+import org.assertj.core.api.AbstractCharacterAssert;
+import org.assertj.core.api.AbstractCollectionAssert;
+import org.assertj.core.api.AbstractComparableAssert;
+import org.assertj.core.api.AbstractDateAssert;
+import org.assertj.core.api.AbstractDoubleArrayAssert;
+import org.assertj.core.api.AbstractDoubleAssert;
+import org.assertj.core.api.AbstractDurationAssert;
+import org.assertj.core.api.AbstractFileAssert;
+import org.assertj.core.api.AbstractFloatArrayAssert;
+import org.assertj.core.api.AbstractFloatAssert;
+import org.assertj.core.api.AbstractInputStreamAssert;
+import org.assertj.core.api.AbstractInstantAssert;
+import org.assertj.core.api.AbstractIntArrayAssert;
+import org.assertj.core.api.AbstractIntegerAssert;
+import org.assertj.core.api.AbstractLocalDateAssert;
+import org.assertj.core.api.AbstractLocalDateTimeAssert;
+import org.assertj.core.api.AbstractLocalTimeAssert;
+import org.assertj.core.api.AbstractLongArrayAssert;
+import org.assertj.core.api.AbstractLongAssert;
+import org.assertj.core.api.AbstractOffsetDateTimeAssert;
+import org.assertj.core.api.AbstractOffsetTimeAssert;
+import org.assertj.core.api.AbstractPathAssert;
+import org.assertj.core.api.AbstractPeriodAssert;
+import org.assertj.core.api.AbstractShortArrayAssert;
+import org.assertj.core.api.AbstractShortAssert;
+import org.assertj.core.api.AbstractStringAssert;
+import org.assertj.core.api.AbstractThrowableAssert;
+import org.assertj.core.api.AbstractUriAssert;
+import org.assertj.core.api.AbstractUrlAssert;
+import org.assertj.core.api.AbstractZonedDateTimeAssert;
+import org.assertj.core.api.AssertDelegateTarget;
+import org.assertj.core.api.AssertFactory;
+import org.assertj.core.api.AssertProvider;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.AtomicBooleanAssert;
+import org.assertj.core.api.AtomicIntegerArrayAssert;
+import org.assertj.core.api.AtomicIntegerAssert;
+import org.assertj.core.api.AtomicIntegerFieldUpdaterAssert;
+import org.assertj.core.api.AtomicLongArrayAssert;
+import org.assertj.core.api.AtomicLongAssert;
+import org.assertj.core.api.AtomicLongFieldUpdaterAssert;
+import org.assertj.core.api.AtomicMarkableReferenceAssert;
+import org.assertj.core.api.AtomicReferenceArrayAssert;
+import org.assertj.core.api.AtomicReferenceAssert;
+import org.assertj.core.api.AtomicReferenceFieldUpdaterAssert;
+import org.assertj.core.api.AtomicStampedReferenceAssert;
+import org.assertj.core.api.Boolean2DArrayAssert;
+import org.assertj.core.api.Byte2DArrayAssert;
+import org.assertj.core.api.Char2DArrayAssert;
+import org.assertj.core.api.ClassAssert;
+import org.assertj.core.api.ClassBasedNavigableIterableAssert;
+import org.assertj.core.api.ClassBasedNavigableListAssert;
+import org.assertj.core.api.CompletableFutureAssert;
+import org.assertj.core.api.Condition;
+import org.assertj.core.api.Double2DArrayAssert;
+import org.assertj.core.api.DoublePredicateAssert;
+import org.assertj.core.api.FactoryBasedNavigableIterableAssert;
+import org.assertj.core.api.FactoryBasedNavigableListAssert;
+import org.assertj.core.api.Float2DArrayAssert;
+import org.assertj.core.api.FutureAssert;
+import org.assertj.core.api.InstanceOfAssertFactory;
+import org.assertj.core.api.Int2DArrayAssert;
+import org.assertj.core.api.IntPredicateAssert;
+import org.assertj.core.api.IterableAssert;
+import org.assertj.core.api.IteratorAssert;
+import org.assertj.core.api.ListAssert;
+import org.assertj.core.api.Long2DArrayAssert;
+import org.assertj.core.api.LongAdderAssert;
+import org.assertj.core.api.LongPredicateAssert;
+import org.assertj.core.api.MapAssert;
+import org.assertj.core.api.NotThrownAssert;
+import org.assertj.core.api.Object2DArrayAssert;
+import org.assertj.core.api.ObjectArrayAssert;
+import org.assertj.core.api.ObjectAssert;
+import org.assertj.core.api.OptionalAssert;
+import org.assertj.core.api.OptionalDoubleAssert;
+import org.assertj.core.api.OptionalIntAssert;
+import org.assertj.core.api.OptionalLongAssert;
+import org.assertj.core.api.PredicateAssert;
+import org.assertj.core.api.Short2DArrayAssert;
+import org.assertj.core.api.SpliteratorAssert;
+import org.assertj.core.api.ThrowableAssert;
+import org.assertj.core.api.ThrowableTypeAssert;
+import org.assertj.core.api.filter.Filters;
+import org.assertj.core.api.filter.InFilter;
+import org.assertj.core.api.filter.NotFilter;
+import org.assertj.core.api.filter.NotInFilter;
+import org.assertj.core.condition.DoesNotHave;
+import org.assertj.core.condition.Not;
+import org.assertj.core.data.Index;
+import org.assertj.core.data.MapEntry;
+import org.assertj.core.data.Offset;
+import org.assertj.core.data.Percentage;
+import org.assertj.core.data.TemporalUnitOffset;
+import org.assertj.core.description.Description;
+import org.assertj.core.groups.Properties;
+import org.assertj.core.groups.Tuple;
 import org.assertj.core.presentation.Representation; 
 
 /** 
@@ -150,6 +174,255 @@ public interface AssertJ {
 
 
     // CONSTANTS: 
+
+//    /** {@link org.assertj.core.api.Assertions#ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> ARRAY = Assertions.ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#ARRAY_2D} */
+//    static final InstanceOfAssertFactory<Object, Object> ARRAY_2D = Assertions.ARRAY_2D;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_BOOLEAN} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_BOOLEAN = Assertions.ATOMIC_BOOLEAN;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_INTEGER} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_INTEGER = Assertions.ATOMIC_INTEGER;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_INTEGER_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_INTEGER_ARRAY = Assertions.ATOMIC_INTEGER_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_INTEGER_FIELD_UPDATER} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_INTEGER_FIELD_UPDATER = Assertions.ATOMIC_INTEGER_FIELD_UPDATER;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_LONG} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_LONG = Assertions.ATOMIC_LONG;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_LONG_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_LONG_ARRAY = Assertions.ATOMIC_LONG_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_LONG_FIELD_UPDATER} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_LONG_FIELD_UPDATER = Assertions.ATOMIC_LONG_FIELD_UPDATER;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_MARKABLE_REFERENCE} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_MARKABLE_REFERENCE = Assertions.ATOMIC_MARKABLE_REFERENCE;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_REFERENCE} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_REFERENCE = Assertions.ATOMIC_REFERENCE;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_REFERENCE_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_REFERENCE_ARRAY = Assertions.ATOMIC_REFERENCE_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_REFERENCE_FIELD_UPDATER} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_REFERENCE_FIELD_UPDATER = Assertions.ATOMIC_REFERENCE_FIELD_UPDATER;
+//
+//    /** {@link org.assertj.core.api.Assertions#ATOMIC_STAMPED_REFERENCE} */
+//    static final InstanceOfAssertFactory<Object, Object> ATOMIC_STAMPED_REFERENCE = Assertions.ATOMIC_STAMPED_REFERENCE;
+//
+//    /** {@link org.assertj.core.api.Assertions#BIG_DECIMAL} */
+//    static final InstanceOfAssertFactory<Object, Object> BIG_DECIMAL = Assertions.BIG_DECIMAL;
+//
+//    /** {@link org.assertj.core.api.Assertions#BIG_INTEGER} */
+//    static final InstanceOfAssertFactory<Object, Object> BIG_INTEGER = Assertions.BIG_INTEGER;
+//
+//    /** {@link org.assertj.core.api.Assertions#BOOLEAN} */
+//    static final InstanceOfAssertFactory<Object, Object> BOOLEAN = Assertions.BOOLEAN;
+//
+//    /** {@link org.assertj.core.api.Assertions#BOOLEAN_2D_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> BOOLEAN_2D_ARRAY = Assertions.BOOLEAN_2D_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#BOOLEAN_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> BOOLEAN_ARRAY = Assertions.BOOLEAN_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#BYTE} */
+//    static final InstanceOfAssertFactory<Object, Object> BYTE = Assertions.BYTE;
+//
+//    /** {@link org.assertj.core.api.Assertions#BYTE_2D_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> BYTE_2D_ARRAY = Assertions.BYTE_2D_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#BYTE_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> BYTE_ARRAY = Assertions.BYTE_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#CHARACTER} */
+//    static final InstanceOfAssertFactory<Object, Object> CHARACTER = Assertions.CHARACTER;
+//
+//    /** {@link org.assertj.core.api.Assertions#CHAR_2D_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> CHAR_2D_ARRAY = Assertions.CHAR_2D_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#CHAR_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> CHAR_ARRAY = Assertions.CHAR_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#CHAR_SEQUENCE} */
+//    static final InstanceOfAssertFactory<Object, Object> CHAR_SEQUENCE = Assertions.CHAR_SEQUENCE;
+//
+//    /** {@link org.assertj.core.api.Assertions#CLASS} */
+//    static final InstanceOfAssertFactory<Object, Object> CLASS = Assertions.CLASS;
+//
+//    /** {@link org.assertj.core.api.Assertions#COLLECTION} */
+//    static final InstanceOfAssertFactory<Object, Object> COLLECTION = Assertions.COLLECTION;
+//
+//    /** {@link org.assertj.core.api.Assertions#COMPLETABLE_FUTURE} */
+//    static final InstanceOfAssertFactory<Object, Object> COMPLETABLE_FUTURE = Assertions.COMPLETABLE_FUTURE;
+//
+//    /** {@link org.assertj.core.api.Assertions#COMPLETION_STAGE} */
+//    static final InstanceOfAssertFactory<Object, Object> COMPLETION_STAGE = Assertions.COMPLETION_STAGE;
+//
+//    /** {@link org.assertj.core.api.Assertions#DATE} */
+//    static final InstanceOfAssertFactory<Object, Object> DATE = Assertions.DATE;
+//
+//    /** {@link org.assertj.core.api.Assertions#DOUBLE} */
+//    static final InstanceOfAssertFactory<Object, Object> DOUBLE = Assertions.DOUBLE;
+//
+//    /** {@link org.assertj.core.api.Assertions#DOUBLE_2D_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> DOUBLE_2D_ARRAY = Assertions.DOUBLE_2D_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#DOUBLE_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> DOUBLE_ARRAY = Assertions.DOUBLE_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#DOUBLE_PREDICATE} */
+//    static final InstanceOfAssertFactory<Object, Object> DOUBLE_PREDICATE = Assertions.DOUBLE_PREDICATE;
+//
+//    /** {@link org.assertj.core.api.Assertions#DOUBLE_STREAM} */
+//    static final InstanceOfAssertFactory<Object, Object> DOUBLE_STREAM = Assertions.DOUBLE_STREAM;
+//
+//    /** {@link org.assertj.core.api.Assertions#DURATION} */
+//    static final InstanceOfAssertFactory<Object, Object> DURATION = Assertions.DURATION;
+//
+//    /** {@link org.assertj.core.api.Assertions#FILE} */
+//    static final InstanceOfAssertFactory<Object, Object> FILE = Assertions.FILE;
+//
+//    /** {@link org.assertj.core.api.Assertions#FLOAT} */
+//    static final InstanceOfAssertFactory<Object, Object> FLOAT = Assertions.FLOAT;
+//
+//    /** {@link org.assertj.core.api.Assertions#FLOAT_2D_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> FLOAT_2D_ARRAY = Assertions.FLOAT_2D_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#FLOAT_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> FLOAT_ARRAY = Assertions.FLOAT_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#FUTURE} */
+//    static final InstanceOfAssertFactory<Object, Object> FUTURE = Assertions.FUTURE;
+//
+//    /** {@link org.assertj.core.api.Assertions#INPUT_STREAM} */
+//    static final InstanceOfAssertFactory<Object, Object> INPUT_STREAM = Assertions.INPUT_STREAM;
+//
+//    /** {@link org.assertj.core.api.Assertions#INSTANT} */
+//    static final InstanceOfAssertFactory<Object, Object> INSTANT = Assertions.INSTANT;
+//
+//    /** {@link org.assertj.core.api.Assertions#INTEGER} */
+//    static final InstanceOfAssertFactory<Object, Object> INTEGER = Assertions.INTEGER;
+//
+//    /** {@link org.assertj.core.api.Assertions#INT_2D_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> INT_2D_ARRAY = Assertions.INT_2D_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#INT_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> INT_ARRAY = Assertions.INT_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#INT_PREDICATE} */
+//    static final InstanceOfAssertFactory<Object, Object> INT_PREDICATE = Assertions.INT_PREDICATE;
+//
+//    /** {@link org.assertj.core.api.Assertions#INT_STREAM} */
+//    static final InstanceOfAssertFactory<Object, Object> INT_STREAM = Assertions.INT_STREAM;
+//
+//    /** {@link org.assertj.core.api.Assertions#ITERABLE} */
+//    static final InstanceOfAssertFactory<Object, Object> ITERABLE = Assertions.ITERABLE;
+
+//    /** {@link org.assertj.core.api.Assertions#ITERATOR} */
+//    static final InstanceOfAssertFactory<Object, Object> ITERATOR = Assertions.ITERATOR;
+//
+//    /** {@link org.assertj.core.api.Assertions#LIST} */
+//    static final InstanceOfAssertFactory<Object, Object> LIST = Assertions.LIST;
+//
+//    /** {@link org.assertj.core.api.Assertions#LOCAL_DATE} */
+//    static final InstanceOfAssertFactory<Object, Object> LOCAL_DATE = Assertions.LOCAL_DATE;
+//
+//    /** {@link org.assertj.core.api.Assertions#LOCAL_DATE_TIME} */
+//    static final InstanceOfAssertFactory<Object, Object> LOCAL_DATE_TIME = Assertions.LOCAL_DATE_TIME;
+//
+//    /** {@link org.assertj.core.api.Assertions#LOCAL_TIME} */
+//    static final InstanceOfAssertFactory<Object, Object> LOCAL_TIME = Assertions.LOCAL_TIME;
+//
+//    /** {@link org.assertj.core.api.Assertions#LONG} */
+//    static final InstanceOfAssertFactory<Object, Object> LONG = Assertions.LONG;
+//
+//    /** {@link org.assertj.core.api.Assertions#LONG_2D_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> LONG_2D_ARRAY = Assertions.LONG_2D_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#LONG_ADDER} */
+//    static final InstanceOfAssertFactory<Object, Object> LONG_ADDER = Assertions.LONG_ADDER;
+//
+//    /** {@link org.assertj.core.api.Assertions#LONG_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> LONG_ARRAY = Assertions.LONG_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#LONG_PREDICATE} */
+//    static final InstanceOfAssertFactory<Object, Object> LONG_PREDICATE = Assertions.LONG_PREDICATE;
+//
+//    /** {@link org.assertj.core.api.Assertions#LONG_STREAM} */
+//    static final InstanceOfAssertFactory<Object, Object> LONG_STREAM = Assertions.LONG_STREAM;
+//
+//    /** {@link org.assertj.core.api.Assertions#MAP} */
+//    static final InstanceOfAssertFactory<Object, Object> MAP = Assertions.MAP;
+//
+//    /** {@link org.assertj.core.api.Assertions#OFFSET_DATE_TIME} */
+//    static final InstanceOfAssertFactory<Object, Object> OFFSET_DATE_TIME = Assertions.OFFSET_DATE_TIME;
+//
+//    /** {@link org.assertj.core.api.Assertions#OFFSET_TIME} */
+//    static final InstanceOfAssertFactory<Object, Object> OFFSET_TIME = Assertions.OFFSET_TIME;
+//
+//    /** {@link org.assertj.core.api.Assertions#OPTIONAL} */
+//    static final InstanceOfAssertFactory<Object, Object> OPTIONAL = Assertions.OPTIONAL;
+//
+//    /** {@link org.assertj.core.api.Assertions#OPTIONAL_DOUBLE} */
+//    static final InstanceOfAssertFactory<Object, Object> OPTIONAL_DOUBLE = Assertions.OPTIONAL_DOUBLE;
+//
+//    /** {@link org.assertj.core.api.Assertions#OPTIONAL_INT} */
+//    static final InstanceOfAssertFactory<Object, Object> OPTIONAL_INT = Assertions.OPTIONAL_INT;
+//
+//    /** {@link org.assertj.core.api.Assertions#OPTIONAL_LONG} */
+//    static final InstanceOfAssertFactory<Object, Object> OPTIONAL_LONG = Assertions.OPTIONAL_LONG;
+//
+//    /** {@link org.assertj.core.api.Assertions#PATH} */
+//    static final InstanceOfAssertFactory<Object, Object> PATH = Assertions.PATH;
+//
+//    /** {@link org.assertj.core.api.Assertions#PERIOD} */
+//    static final InstanceOfAssertFactory<Object, Object> PERIOD = Assertions.PERIOD;
+//
+//    /** {@link org.assertj.core.api.Assertions#PREDICATE} */
+//    static final InstanceOfAssertFactory<Object, Object> PREDICATE = Assertions.PREDICATE;
+//
+//    /** {@link org.assertj.core.api.Assertions#SHORT} */
+//    static final InstanceOfAssertFactory<Object, Object> SHORT = Assertions.SHORT;
+//
+//    /** {@link org.assertj.core.api.Assertions#SHORT_2D_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> SHORT_2D_ARRAY = Assertions.SHORT_2D_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#SHORT_ARRAY} */
+//    static final InstanceOfAssertFactory<Object, Object> SHORT_ARRAY = Assertions.SHORT_ARRAY;
+//
+//    /** {@link org.assertj.core.api.Assertions#SPLITERATOR} */
+//    static final InstanceOfAssertFactory<Object, Object> SPLITERATOR = Assertions.SPLITERATOR;
+//
+//    /** {@link org.assertj.core.api.Assertions#STREAM} */
+//    static final InstanceOfAssertFactory<Object, Object> STREAM = Assertions.STREAM;
+//
+//    /** {@link org.assertj.core.api.Assertions#STRING} */
+//    static final InstanceOfAssertFactory<Object, Object> STRING = Assertions.STRING;
+//
+//    /** {@link org.assertj.core.api.Assertions#STRING_BUFFER} */
+//    static final InstanceOfAssertFactory<Object, Object> STRING_BUFFER = Assertions.STRING_BUFFER;
+//
+//    /** {@link org.assertj.core.api.Assertions#STRING_BUILDER} */
+//    static final InstanceOfAssertFactory<Object, Object> STRING_BUILDER = Assertions.STRING_BUILDER;
+//
+//    /** {@link org.assertj.core.api.Assertions#THROWABLE} */
+//    static final InstanceOfAssertFactory<Object, Object> THROWABLE = Assertions.THROWABLE;
+//
+//    /** {@link org.assertj.core.api.Assertions#URI_TYPE} */
+//    static final InstanceOfAssertFactory<Object, Object> URI_TYPE = Assertions.URI_TYPE;
+//
+//    /** {@link org.assertj.core.api.Assertions#URL_TYPE} */
+//    static final InstanceOfAssertFactory<Object, Object> URL_TYPE = Assertions.URL_TYPE;
+//
+//    /** {@link org.assertj.core.api.Assertions#ZONED_DATE_TIME} */
+//    static final InstanceOfAssertFactory<Object, Object> ZONED_DATE_TIME = Assertions.ZONED_DATE_TIME;
 
 
     // DELEGATE METHODS: 
@@ -190,6 +463,16 @@ public interface AssertJ {
      */
     default <T> Condition<T> anyOf(Iterable<? extends Condition<? super T>> conditions) {
         return Assertions.anyOf(conditions);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T,ASSERT> org.assertj.core.api.InstanceOfAssertFactory<T, ASSERT> org.assertj.core.api.Assertions.as(org.assertj.core.api.InstanceOfAssertFactory<T, ASSERT>)
+     * {@link org.assertj.core.api.Assertions#as(org.assertj.core.api.InstanceOfAssertFactory)}
+     */
+    default <T,ASSERT extends AbstractAssert<?, ?>> InstanceOfAssertFactory<T, ASSERT> as(InstanceOfAssertFactory<T, ASSERT> assertFactory) {
+        return Assertions.as(assertFactory);
     }
 
 
@@ -375,6 +658,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.Boolean2DArrayAssert org.assertj.core.api.Assertions.assertThat(boolean[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(boolean[][])}
+     */
+    default Boolean2DArrayAssert assertThat(boolean[][] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.AbstractByteAssert<?> org.assertj.core.api.Assertions.assertThat(byte)
      * {@link org.assertj.core.api.Assertions#assertThat(byte)}
      */
@@ -405,6 +698,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.Byte2DArrayAssert org.assertj.core.api.Assertions.assertThat(byte[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(byte[][])}
+     */
+    default Byte2DArrayAssert assertThat(byte[][] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.AbstractCharacterAssert<?> org.assertj.core.api.Assertions.assertThat(char)
      * {@link org.assertj.core.api.Assertions#assertThat(char)}
      */
@@ -419,6 +722,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(char[])}
      */
     default AbstractCharArrayAssert<?> assertThat(char[] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.Char2DArrayAssert org.assertj.core.api.Assertions.assertThat(char[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(char[][])}
+     */
+    default Char2DArrayAssert assertThat(char[][] actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -449,6 +762,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Class)}
      */
     default ClassAssert assertThat(Class<?> actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static <E> org.assertj.core.api.AbstractCollectionAssert<?, java.util.Collection<? extends E>, E, org.assertj.core.api.ObjectAssert<E>> org.assertj.core.api.Assertions.assertThat(java.util.Collection<? extends E>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.Collection)}
+     */
+    default <E> AbstractCollectionAssert<?, Collection<? extends E>, E, ObjectAssert<E>> assertThat(Collection<? extends E> actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -515,6 +838,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.Double2DArrayAssert org.assertj.core.api.Assertions.assertThat(double[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(double[][])}
+     */
+    default Double2DArrayAssert assertThat(double[][] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.DoublePredicateAssert org.assertj.core.api.Assertions.assertThat(java.util.function.DoublePredicate)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.DoublePredicate)}
      */
@@ -529,6 +862,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.stream.DoubleStream)}
      */
     default ListAssert<Double> assertThat(DoubleStream actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.AbstractDurationAssert<?> org.assertj.core.api.Assertions.assertThat(java.time.Duration)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.time.Duration)}
+     */
+    default AbstractDurationAssert<?> assertThat(Duration actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -569,6 +912,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(float[])}
      */
     default AbstractFloatArrayAssert<?> assertThat(float[] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.Float2DArrayAssert org.assertj.core.api.Assertions.assertThat(float[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(float[][])}
+     */
+    default Float2DArrayAssert assertThat(float[][] actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -619,6 +972,16 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(int[])}
      */
     default AbstractIntArrayAssert<?> assertThat(int[] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.Int2DArrayAssert org.assertj.core.api.Assertions.assertThat(int[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(int[][])}
+     */
+    default Int2DArrayAssert assertThat(int[][] actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -745,6 +1108,26 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.Long2DArrayAssert org.assertj.core.api.Assertions.assertThat(long[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(long[][])}
+     */
+    default Long2DArrayAssert assertThat(long[][] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.LongAdderAssert org.assertj.core.api.Assertions.assertThat(java.util.concurrent.atomic.LongAdder)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.concurrent.atomic.LongAdder)}
+     */
+    default LongAdderAssert assertThat(LongAdder actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.LongPredicateAssert org.assertj.core.api.Assertions.assertThat(java.util.function.LongPredicate)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.LongPredicate)}
      */
@@ -845,6 +1228,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.AbstractPeriodAssert<?> org.assertj.core.api.Assertions.assertThat(java.time.Period)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.time.Period)}
+     */
+    default AbstractPeriodAssert<?> assertThat(Period actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
      * Delegate call to public static <T> org.assertj.core.api.PredicateAssert<T> org.assertj.core.api.Assertions.assertThat(java.util.function.Predicate<T>)
      * {@link org.assertj.core.api.Assertions#assertThat(java.util.function.Predicate)}
      */
@@ -879,6 +1272,26 @@ public interface AssertJ {
      * {@link org.assertj.core.api.Assertions#assertThat(short[])}
      */
     default AbstractShortArrayAssert<?> assertThat(short[] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static org.assertj.core.api.Short2DArrayAssert org.assertj.core.api.Assertions.assertThat(short[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(short[][])}
+     */
+    default Short2DArrayAssert assertThat(short[][] actual) {
+        return Assertions.assertThat(actual);
+    }
+
+
+
+    /**
+     * Delegate call to public static <ELEMENT> org.assertj.core.api.SpliteratorAssert<ELEMENT> org.assertj.core.api.Assertions.assertThat(java.util.Spliterator<ELEMENT>)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.util.Spliterator)}
+     */
+    default <ELEMENT> SpliteratorAssert<ELEMENT> assertThat(Spliterator<ELEMENT> actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -945,6 +1358,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static <T> org.assertj.core.api.AbstractThrowableAssert<?, T> org.assertj.core.api.Assertions.assertThat(T)
+     * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Throwable)}
+     */
+    default <T extends Throwable> AbstractThrowableAssert<?, T> assertThat(T assertion) {
+        return Assertions.assertThat(assertion);
+    }
+
+
+
+    /**
      * Delegate call to public static <T> org.assertj.core.api.ObjectAssert<T> org.assertj.core.api.Assertions.assertThat(T)
      * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Object)}
      */
@@ -965,10 +1388,10 @@ public interface AssertJ {
 
 
     /**
-     * Delegate call to public static org.assertj.core.api.AbstractThrowableAssert<?, ? extends java.lang.Throwable> org.assertj.core.api.Assertions.assertThat(java.lang.Throwable)
-     * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Throwable)}
+     * Delegate call to public static <T> org.assertj.core.api.Object2DArrayAssert<T> org.assertj.core.api.Assertions.assertThat(T[][])
+     * {@link org.assertj.core.api.Assertions#assertThat(java.lang.Object[][])}
      */
-    default AbstractThrowableAssert<?, ? extends Throwable> assertThat(Throwable actual) {
+    default <T> Object2DArrayAssert<T> assertThat(T[][] actual) {
         return Assertions.assertThat(actual);
     }
 
@@ -1095,6 +1518,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static org.assertj.core.api.NotThrownAssert org.assertj.core.api.Assertions.assertThatNoException()
+     * {@link org.assertj.core.api.Assertions#assertThatNoException()}
+     */
+    default NotThrownAssert assertThatNoException() {
+        return Assertions.assertThatNoException();
+    }
+
+
+
+    /**
      * Delegate call to public static org.assertj.core.api.ThrowableTypeAssert<java.lang.NullPointerException> org.assertj.core.api.Assertions.assertThatNullPointerException()
      * {@link org.assertj.core.api.Assertions#assertThatNullPointerException()}
      */
@@ -1130,6 +1563,16 @@ public interface AssertJ {
      */
     default AbstractThrowableAssert<?, ? extends Throwable> assertThatThrownBy(ThrowableAssert.ThrowingCallable shouldRaiseThrowable, String description, Object... args) {
         return Assertions.assertThatThrownBy(shouldRaiseThrowable, description, args);
+    }
+
+
+
+    /**
+     * Delegate call to public static <T> org.assertj.core.api.ObjectAssert<T> org.assertj.core.api.Assertions.assertWith(T,java.util.function.Consumer<T>...)
+     * {@link org.assertj.core.api.Assertions#assertWith(java.lang.Object,java.util.function.Consumer[])}
+     */
+    default <T> ObjectAssert<T> assertWith(T actual, Consumer<T>... requirements) {
+        return Assertions.assertWith(actual, requirements);
     }
 
 
@@ -1230,6 +1673,86 @@ public interface AssertJ {
      */
     default TemporalUnitOffset byLessThan(long value, TemporalUnit unit) {
         return Assertions.byLessThan(value, unit);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.lang.Exception org.assertj.core.api.Assertions.catchException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
+     * {@link org.assertj.core.api.Assertions#catchException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
+     */
+    default Exception catchException(ThrowableAssert.ThrowingCallable shouldRaiseException) {
+        return Assertions.catchException(shouldRaiseException);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.io.IOException org.assertj.core.api.Assertions.catchIOException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
+     * {@link org.assertj.core.api.Assertions#catchIOException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
+     */
+    default IOException catchIOException(ThrowableAssert.ThrowingCallable shouldRaiseIOException) {
+        return Assertions.catchIOException(shouldRaiseIOException);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.lang.IllegalArgumentException org.assertj.core.api.Assertions.catchIllegalArgumentException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
+     * {@link org.assertj.core.api.Assertions#catchIllegalArgumentException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
+     */
+    default IllegalArgumentException catchIllegalArgumentException(ThrowableAssert.ThrowingCallable shouldRaiseIllegalArgumentException) {
+        return Assertions.catchIllegalArgumentException(shouldRaiseIllegalArgumentException);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.lang.IllegalStateException org.assertj.core.api.Assertions.catchIllegalStateException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
+     * {@link org.assertj.core.api.Assertions#catchIllegalStateException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
+     */
+    default IllegalStateException catchIllegalStateException(ThrowableAssert.ThrowingCallable shouldRaiseIllegalStateException) {
+        return Assertions.catchIllegalStateException(shouldRaiseIllegalStateException);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.lang.IndexOutOfBoundsException org.assertj.core.api.Assertions.catchIndexOutOfBoundsException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
+     * {@link org.assertj.core.api.Assertions#catchIndexOutOfBoundsException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
+     */
+    default IndexOutOfBoundsException catchIndexOutOfBoundsException(ThrowableAssert.ThrowingCallable shouldRaiseIndexOutOfBoundException) {
+        return Assertions.catchIndexOutOfBoundsException(shouldRaiseIndexOutOfBoundException);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.lang.NullPointerException org.assertj.core.api.Assertions.catchNullPointerException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
+     * {@link org.assertj.core.api.Assertions#catchNullPointerException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
+     */
+    default NullPointerException catchNullPointerException(ThrowableAssert.ThrowingCallable shouldRaiseNullPointerException) {
+        return Assertions.catchNullPointerException(shouldRaiseNullPointerException);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.lang.ReflectiveOperationException org.assertj.core.api.Assertions.catchReflectiveOperationException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
+     * {@link org.assertj.core.api.Assertions#catchReflectiveOperationException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
+     */
+    default ReflectiveOperationException catchReflectiveOperationException(ThrowableAssert.ThrowingCallable shouldRaiseReflectiveOperationException) {
+        return Assertions.catchReflectiveOperationException(shouldRaiseReflectiveOperationException);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.lang.RuntimeException org.assertj.core.api.Assertions.catchRuntimeException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)
+     * {@link org.assertj.core.api.Assertions#catchRuntimeException(org.assertj.core.api.ThrowableAssert$ThrowingCallable)}
+     */
+    default RuntimeException catchRuntimeException(ThrowableAssert.ThrowingCallable shouldRaiseRuntimeException) {
+        return Assertions.catchRuntimeException(shouldRaiseRuntimeException);
     }
 
 
@@ -1595,6 +2118,16 @@ public interface AssertJ {
 
 
     /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.setDescriptionConsumer(java.util.function.Consumer<org.assertj.core.description.Description>)
+     * {@link org.assertj.core.api.Assertions#setDescriptionConsumer(java.util.function.Consumer)}
+     */
+    default void setDescriptionConsumer(Consumer<Description> descriptionConsumer) {
+        Assertions.setDescriptionConsumer(descriptionConsumer);
+    }
+
+
+
+    /**
      * Delegate call to public static void org.assertj.core.api.Assertions.setExtractBareNamePropertyMethods(boolean)
      * {@link org.assertj.core.api.Assertions#setExtractBareNamePropertyMethods(boolean)}
      */
@@ -1630,6 +2163,26 @@ public interface AssertJ {
      */
     default void setMaxLengthForSingleLineDescription(int maxLengthForSingleLineDescription) {
         Assertions.setMaxLengthForSingleLineDescription(maxLengthForSingleLineDescription);
+    }
+
+
+
+    /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.setMaxStackTraceElementsDisplayed(int)
+     * {@link org.assertj.core.api.Assertions#setMaxStackTraceElementsDisplayed(int)}
+     */
+    default void setMaxStackTraceElementsDisplayed(int maxStackTraceElementsDisplayed) {
+        Assertions.setMaxStackTraceElementsDisplayed(maxStackTraceElementsDisplayed);
+    }
+
+
+
+    /**
+     * Delegate call to public static void org.assertj.core.api.Assertions.setPrintAssertionsDescription(boolean)
+     * {@link org.assertj.core.api.Assertions#setPrintAssertionsDescription(boolean)}
+     */
+    default void setPrintAssertionsDescription(boolean printAssertionsDescription) {
+        Assertions.setPrintAssertionsDescription(printAssertionsDescription);
     }
 
 
@@ -1690,6 +2243,16 @@ public interface AssertJ {
      */
     default void useRepresentation(Representation customRepresentation) {
         Assertions.useRepresentation(customRepresentation);
+    }
+
+
+
+    /**
+     * Delegate call to public static java.time.Duration org.assertj.core.api.Assertions.withMarginOf(java.time.Duration)
+     * {@link org.assertj.core.api.Assertions#withMarginOf(java.time.Duration)}
+     */
+    default Duration withMarginOf(Duration allowedDifference) {
+        return Assertions.withMarginOf(allowedDifference);
     }
 
 
